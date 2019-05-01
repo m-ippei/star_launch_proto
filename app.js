@@ -1,5 +1,17 @@
-const app = new PIXI.Application({ backgroundColor: 0x1099bb });
+const app = new PIXI.Application({
+    width:window.innerWidth,
+    height:window.innerHeight,
+    backgroundColor:0xffffe0
+});
+
+app.view.style.position = "absolute";
+app.renderer.view.style.display = "block";
+app.renderer.autoResize = true;
+app.renderer.resize(window.innerWidth,window.innerHeight);
+
 document.body.appendChild(app.view);
+
+/*
 
 // Scale mode for all textures, will retain pixelation
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
@@ -30,3 +42,5 @@ function onClick() {
     sprite.scale.x *= 1.25;
     sprite.scale.y *= 1.25;
 }
+
+*/
