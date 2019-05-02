@@ -11,6 +11,11 @@ const app = new PIXI.Application({
     backgroundColor:0xffffe0
 });
 
+let message = new PIXI.Text(WIDTH.toString()+"  "+HEIGHT.toString());
+app.stage.addChild(message);
+
+message.position.set(100,100);
+
 app.view.style.position = "absolute";
 app.renderer.view.style.display = "block";
 app.renderer.autoDensity = true;
@@ -28,20 +33,4 @@ function setup() {
     app.stage.addChild(sprites.red);
 }
 
-/*
 
-app.loader.add("orbs","images/orbs.json").load((loader,resources)=>{
-    let sheet = resources["images/orbs.json"]
-    sprites.red = new PIXI.Sprite(sheet.textures["red.png"])
-    sprites.red.position.set(CENTER.x,CENTER.y);
-    app.stage.addChild(sprites.red);
-    
-    const orbs = new PIXI.Sprite(resources.orbs.texture);
-    orbs.x = CENTER.x;
-    orbs.y = CENTER.y;
-
-    app.stage.addChild(orbs);
-    
-})
-
-*/
