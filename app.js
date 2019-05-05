@@ -1,19 +1,52 @@
-
-
-
 class StarBoard{
     constructor(){
+        /**
+         *  データ構造について
+         *   配列が3*5の時
+         * 
+         *   例
+         *   let a = [
+         *    [0,0,0,0,0],
+         *    [0,0,0,0,0],
+         *    [0,0,0,0,0]
+         *    ]
+         * 
+         *   a[i][j]のiは星の深さ、jは星の位置
+         */
 
-        //util
+        //スプライト格納 3*5
+        this.sprites = [];
+        //色情報の格納 3*5
+        this.colors = [];
+
+        //星の中心座標
+        this.BoardCenter = {};
+        //オーブ配置の中心座標
+        this.InnerCircleCenterPosition = {};
+
+        //オーブの全配置 (配列内は{"x":0,"y":0}で初期化)
+        this.OrbPositions = [];
+
+        //オーブ配置のラジアン（定数・参照のみ）
+        this.InnerCircleRad = [];
+        //オーブ配置のラジアン (定数・参照のみ)
+        this.OuterPositionCircleRad = [];
+    }
+
+    Initialise() {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+
         this._3x5Array = new Array(3).fill(new Array(5).fill(0));
         this._2x5Array = new Array(2).fill(new Array(5).fill(0));
-
 
         this.sprites = this._3x5Array.map((arr)=>arr.slice());
         this.colors = this._3x5Array.map((arr)=>arr.slice());
 
-        this.BoardCenterX = 0;
-        this.BoardCenterY = 0;
+        this.BoardCenter = {
+            "x":0,
+            "y":0
+        }
 
         this.InnerCircleRad = [
             1.5707963267948966,
@@ -30,17 +63,16 @@ class StarBoard{
             [3.8746309394274117,1.780235837034216]
         ];
 
-        this.InnerCircleCenterPositionX = 0;
-        this.InnerCircleCenterPositionY = 0;
+        this.InnerCircleCenterPosition = {
+            "x":0,
+            "y":0
+        }
 
         this.OrbPositions = this._3x5Array.map((arr)=>arr.slice());
         
-        this.w_Width = window.innerWidth;
-        this.w_Height = window.innerHeight;
-
         this.app = new PIXI.Application({
-            width:this.w_Width,
-            height:this.w_Height,
+            width:this.width,
+            height:this.height,
             backgroundColor:0xffffe0
         });
 
@@ -53,9 +85,7 @@ class StarBoard{
         this._red = null;
 
         document.body.appendChild(this.app.view);
-    }
 
-    Initialise() {
         PIXI.Loader.shared.add("images/orbs.json").load((loder, resources) => {
             this.sheet = resources["images/orbs.json"].spritesheet;
             this._red = new PIXI.Sprite(this.sheet.textures["red.png"]);
@@ -69,3 +99,4 @@ class StarBoard{
 
 let sb = new StarBoard();
 sb.Initialise();
+
