@@ -3,12 +3,18 @@
 
 class StarBoard{
     constructor(){
+
+        //util
         this._3x5Array = new Array(3).fill(new Array(5).fill(0));
         this._2x5Array = new Array(2).fill(new Array(5).fill(0));
+
+
         this.sprites = this._3x5Array.map((arr)=>arr.slice());
         this.colors = this._3x5Array.map((arr)=>arr.slice());
+
         this.BoardCenterX = 0;
         this.BoardCenterY = 0;
+
         this.InnerCircleRad = [
             1.5707963267948966,
             0.3141592653589793,
@@ -23,9 +29,12 @@ class StarBoard{
             [5.1312680008633285,3.036872898470133],
             [3.8746309394274117,1.780235837034216]
         ];
+
         this.InnerCircleCenterPositionX = 0;
         this.InnerCircleCenterPositionY = 0;
+
         this.OrbPositions = this._3x5Array.map((arr)=>arr.slice());
+        
         this.w_Width = window.innerWidth;
         this.w_Height = window.innerHeight;
 
@@ -40,8 +49,13 @@ class StarBoard{
         this.app.renderer.autoDensity = true;
         this.app.resize(this.w_Width,this.w_Height);
 
-        document.body.appendChild(this.app.view);
+        this.sheet = null;
+        this._red = null;
 
+        document.body.appendChild(this.app.view);
+    }
+
+    Initialise() {
         PIXI.Loader.shared.add("images/orbs.json").load((loder, resources) => {
             this.sheet = resources["images/orbs.json"].spritesheet;
             this._red = new PIXI.Sprite(this.sheet.textures["red.png"]);
@@ -54,3 +68,4 @@ class StarBoard{
 }
 
 let sb = new StarBoard();
+sb.Initialise();
