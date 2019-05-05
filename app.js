@@ -1,3 +1,6 @@
+
+
+
 class StarBoard{
     constructor(){
         this._3x5Array = new Array(3).fill(new Array(5).fill(0));
@@ -39,18 +42,14 @@ class StarBoard{
 
         document.body.appendChild(this.app.view);
 
-        this.sheet = null;
-        
-        
-    }
-    
-    Initilize() {
-        PIXI.Loader.shared.add("images/orbs.json").load(this.Initilize);
-        this.sheet = PIXI.Loader.shared.resources["images/orbs.json"].spritesheet;
-        this._red = new PIXI.Sprite(sheet.textures["red.png"]);
-        this._red.position.set(100,100);
-        this.sprites.reduce.anchor.set(0.5,0.5);
-        this.app.stage.addChild(this._red);
+        PIXI.Loader.shared.add("images/orbs.json").load((loder, resources) => {
+            this.sheet = resources["images/orbs.json"].spritesheet;
+            this._red = new PIXI.Sprite(this.sheet.textures["red.png"]);
+            this._red.position.set(100,100);
+            this._red.anchor.set(0.5,0.5);
+            this.app.stage.addChild(this._red);
+            }
+        );
     }
 }
 
