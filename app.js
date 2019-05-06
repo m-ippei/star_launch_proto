@@ -65,24 +65,52 @@ class StarBoard{
                 "y":0
             },
             "InnerCircleCenterPosition":{
-                "x":0,
-                "y":0
+                "A":{
+                    "x":0,
+                    "y":0
+                },
+                "B":{
+                    "x":0,
+                    "y":0
+                },
+                "C":{
+                    "x":0,
+                    "y":0
+                },
+                "D":{
+                    "x":0,
+                    "y":0
+                },
+                "E":{
+                    "x":0,
+                    "y":0
+                },
             }
         }
 
+        /**
+         ______A______
+         _____■■■_____
+         __■_■■■■■_■__
+         E■■■■■■■■■■■B
+         __■■■■■■■■■__
+         ___■■___■■___
+         ___D_____C___
+         */
+
         this.InnerCircleRad = [
-            1.5707963267948966,
-            0.3141592653589793,
-            5.340707511102648,
-            4.084070449666731,
-            2.827433388230814
+            1.5707963267948966, //A 90°
+            0.3141592653589793, //B 18°
+            5.340707511102648, //C 306°
+            4.084070449666731, //D 234°
+            2.827433388230814 //E 162°
         ];
         this.OuterPositionCircleRad = [
-            [2.6179938779914944,0.5235987755982988],
-            [1.3613568165555772,5.550147021341967],
-            [0.10471975511965977,4.293509959906051],
-            [5.1312680008633285,3.036872898470133],
-            [3.8746309394274117,1.780235837034216]
+            [2.6179938779914944,0.5235987755982988], //A 150°,30°
+            [5.550147021341967,1.3613568165555772], //B 318°,78°
+            [4.293509959906051,0.10471975511965977], //C 246°,6°
+            [5.1312680008633285,3.036872898470133], //D 294°,174°
+            [3.8746309394274117,1.780235837034216] //E 222°,102°
         ];
 
         //ウィンドウサイズのエイリアス
@@ -135,17 +163,43 @@ class StarBoard{
     }
 
     //デバイス固有の座標群設定
-    setLoacalize() {
-
-        this.localBoardPosition.DrawSize.unitSize = setLocalSize_9x16(this.width,this.height);
-        const _arr = returnleftTopANDRightTop_9x16(this.width,this.height,this.localBoardPosition.DrawSize.unitSize);
-        this.localBoardPosition.DrawSize.TopWidth = _arr[0];
-        this.localBoardPosition.DrawSize.TopHeight = _arr[1];
-
+    setLocalize() {
         
+        const _ds = this.localBoardPosition.DrawSize;
+        _ds.unitSize = this.setLocalSize_9x16(this.width,this.height);
+        const _arr = this.returnleftTopANDRightTop_9x16(this.width,this.height,_ds.unitSize);
+        _ds.TopWidth = _arr[0];
+        _ds.TopHeight = _arr[1];
+
+        const _bc = this.localBoardPosition.BoardCenter;
+        const _bs = this.BoardScale;
+
+        _bc.x = _ds.TopWidth + (_bs.CENTER.x * _ds.unitSize);
+        _bc.y = _ds.TopHeight + (_bs.CENTER.y * _ds.unitSize);
+
+        const _icp = this.localBoardPosition.InnerCircleCenterPosition;
+        const _ir = this.InnerCircleRad;
+        const _cos = Math.cos;
+        const _sin = Math.sin;
+
+        _icp.A.x = _bc.x + (_cos(_ir[0])*_bs.InnerCircleRadius*_ds.unitSize);
+        _icp.A.y = _bc.y + (_sin(_ir[0])*_bs.InnerCircleRadius*_ds.unitSize);
+
+        _icp.B.x = _bc.x + (_cos(_ir[1])*_bs.InnerCircleRadius*_ds.unitSize);
+        _icp.B.y = _bc.y + (_sin(_ir[1])*_bs.InnerCircleRadius*_ds.unitSize);
+
+        _icp.C.x = _bc.x + (_cos(_ir[2])*_bs.InnerCircleRadius*_ds.unitSize);
+        _icp.C.y = _bc.y + (_sin(_ir[2])*_bs.InnerCircleRadius*_ds.unitSize);
+        
+        _icp.D.x = _bc.x + (_cos(_ir[3])*_bs.InnerCircleRadius*_ds.unitSize);
+        _icp.D.y = _bc.y + (_sin(_ir[3])*_bs.InnerCircleRadius*_ds.unitSize);
+        
+        _icp.E.x = _bc.x + (_cos(_ir[4])*_bs.InnerCircleRadius*_ds.unitSize);
+        _icp.E.y = _bc.y + (_sin(_ir[4])*_bs.InnerCircleRadius*_ds.unitSize);
     }
 }
 
 let sb = new StarBoard();
 sb.Initialise();
-sb.setLoacalize();
+sb.setLocalize();
+//console.log(sb);
