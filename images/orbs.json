@@ -1,60 +1,40 @@
-{"frames": {
+{
+"frames": {
+	"blue.png": {
+		"frame": {"x":0, "y":336, "w":175, "h":167},
+		"spriteSourceSize": {"x":0,"y":13,"w":175,"h":180},
+		"sourceSize": {"w":175,"h":180}
+	},
+	"green.png": {
+		"frame": {"x":176, "y":168, "w":175, "h":167},
+		"spriteSourceSize": {"x":0,"y":13,"w":175,"h":180},
+		"sourceSize": {"w":175,"h":180}
+	},
+	"purple.png": {
+		"frame": {"x":176, "y":0, "w":175, "h":167},
+		"spriteSourceSize": {"x":0,"y":13,"w":175,"h":180},
+		"sourceSize": {"w":175,"h":180}
+	},
+	"red.png": {
+		"frame": {"x":176, "y":336, "w":175, "h":167},
+		"spriteSourceSize": {"x":0,"y":13,"w":175,"h":180},
+		"sourceSize": {"w":175,"h":180}
+	},
+	"water.png": {
+		"frame": {"x":0, "y":168, "w":175, "h":167},
+		"spriteSourceSize": {"x":0,"y":13,"w":175,"h":180},
+		"sourceSize": {"w":175,"h":180}
+	},
+	"yellow.png": {
+		"frame": {"x":0, "y":0, "w":175, "h":167},
+		"spriteSourceSize": {"x":0,"y":13,"w":175,"h":180},
+		"sourceSize": {"w":175,"h":180}
+	}
 
-"blue.png":
-{
-	"frame": {"x":1,"y":1,"w":175,"h":168},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":12,"w":175,"h":168},
-	"sourceSize": {"w":175,"h":180}
 },
-"green.png":
-{
-	"frame": {"x":1,"y":171,"w":175,"h":168},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":12,"w":175,"h":168},
-	"sourceSize": {"w":175,"h":180}
-},
-"purple.png":
-{
-	"frame": {"x":1,"y":341,"w":175,"h":168},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":12,"w":175,"h":168},
-	"sourceSize": {"w":175,"h":180}
-},
-"red.png":
-{
-	"frame": {"x":1,"y":511,"w":175,"h":168},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":12,"w":175,"h":168},
-	"sourceSize": {"w":175,"h":180}
-},
-"water.png":
-{
-	"frame": {"x":1,"y":681,"w":175,"h":168},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":12,"w":175,"h":168},
-	"sourceSize": {"w":175,"h":180}
-},
-"yellow.png":
-{
-	"frame": {"x":1,"y":851,"w":175,"h":168},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":12,"w":175,"h":168},
-	"sourceSize": {"w":175,"h":180}
-}},
 "meta": {
-	"app": "https://www.codeandweb.com/texturepacker",
-	"version": "1.0",
 	"image": "orbs.png",
-	"format": "RGBA8888",
-	"size": {"w":177,"h":1020},
-	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:3fae9caf86fefd4b9abacb5c95016275:b4072d96fcc46aade6943d089810906f:f09e7a98dffba42997ae21383b246209$"
+	"size": {"w": 352, "h": 504},
+	"scale": "1"
 }
 }
