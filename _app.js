@@ -214,6 +214,13 @@ class StarBoard{
         this.Orb_InitialPositions = this.OrbPositions.map((arr)=>arr.slice());
     }
 
+    rotateOrb(vertex){
+        //vertexは1~5の引数を取る
+        const [a,b,c] = [OrbPositions[0][vertex],OrbPositions[1][vertex],OrbPositions[2][vertex]];
+        [c,b,a] = [a,b,c];
+        [OrbPositions[0][vertex],OrbPositions[1][vertex],OrbPositions[2][vertex]] = [c,b,a];
+    }
+
     setDraw() {
         PIXI.Loader.shared.add("images/orbs.json").load((loder, resources) => {
             
@@ -241,6 +248,7 @@ class StarBoard{
 
             this.sprites.forEach((v,i,a)=>{
                 v.forEach((v2,i2,a2)=>{
+                    v2.on("pointerdown",this.rotateOrb(i));
                     v2.position.set(this.OrbPositions[i][i2].x,this.OrbPositions[i][i2].y);
                     v2.anchor.set(0.5,0.5);
                     v2.width = this.localBoardPosition.DrawSize.unitSize * this.BoardScale.OrbRadius;
@@ -256,7 +264,7 @@ class StarBoard{
 
     setUpdate() {
         this.app.ticker.add((delta)=>{
-
+            
         })
     }
 }
