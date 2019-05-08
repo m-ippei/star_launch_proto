@@ -225,6 +225,17 @@ class StarBoard{
 
     //描画設定
     setDraw() {
+
+        const graphics = new PIXI.Graphics();
+
+        graphics.lineStyle(0);
+        graphics.beginFill(0xEDEAEC,1);
+        graphics.drawStar(this.localBoardPosition.BoardCenter.x,this.localBoardPosition.BoardCenter.y,5,this.localBoardPosition.DrawSize.unitSize*(this.BoardScale.InnerCircleRadius-this.BoardScale.OrbPositionCircleRadius));
+        graphics.endFill();
+
+        this.app.stage.addChild(graphics);
+
+        //オーブの描画
         PIXI.Loader.shared.add("images/orbs.json").load((loder, resources) => {
             
             const sheet = resources["images/orbs.json"].spritesheet;
