@@ -1,3 +1,5 @@
+let queue = 0;
+
 class StarBoard{
     constructor(){
         /**
@@ -22,8 +24,10 @@ class StarBoard{
         this.OrbPositions = [];
 
         //デバイスのための座標格納(定数・初期化後参照のみ)
-        this.localBoardPosition = {}
+        this.localBoardPosition = {};
 
+        //ボード情報
+        this.BoardInfo = {};
         //オーブの色　ファイル名（参照のみ）
         this.OrbColors = [];
         //参照オーブスプライトの格納
@@ -48,6 +52,10 @@ class StarBoard{
         this.sprites = this._3x5Array.map((arr)=>arr.slice().fill(null));
         this.colors = this._3x5Array.map((arr)=>arr.slice());
         this.OrbPositions = this._3x5Array.map((arr)=>arr.slice());
+
+        this.BoardInfo = {
+            "changeQueue":[]
+        }
 
         this.OrbColors = [
             "blue.png",
@@ -106,12 +114,13 @@ class StarBoard{
             4.084070449666731, //D 234°
             2.827433388230814 //E 162°
         ];
+        
         this.OuterPositionCircleRad = [
-            [2.6179938779914944,0.5235987755982988], //A 150°,30°
-            [5.550147021341967,1.3613568165555772], //B 318°,78°
-            [4.293509959906051,0.10471975511965977], //C 246°,6°
-            [5.1312680008633285,3.036872898470133], //D 294°,174°
-            [3.8746309394274117,1.780235837034216] //E 222°,102°
+           [2.6179938779914944,0.5235987755982988], //A 150°,30°
+           [1.3613568165555772,5.550147021341967], //B 78°,318°
+           [0.10471975511965977,4.293509959906051], //C 6°,246°
+           [5.1312680008633285,3.036872898470133], //D 294°,174°
+           [3.8746309394274117,1.780235837034216] //E 222°,102°
         ];
 
         //ウィンドウサイズのエイリアス
@@ -214,6 +223,7 @@ class StarBoard{
         this.Orb_InitialPositions = this.OrbPositions.map((arr)=>arr.slice());
     }
 
+    //描画設定
     setDraw() {
         PIXI.Loader.shared.add("images/orbs.json").load((loder, resources) => {
             
@@ -241,6 +251,11 @@ class StarBoard{
 
             this.sprites.forEach((v,i,a)=>{
                 v.forEach((v2,i2,a2)=>{
+                    v2.interactive = true;
+                    v2.on("pointerdown",(()=>{
+                        this.BoardInfo.changeQueue.push(i2);
+                        //console.log(this.BoardInfo.changeQueue);
+                    }));
                     v2.position.set(this.OrbPositions[i][i2].x,this.OrbPositions[i][i2].y);
                     v2.anchor.set(0.5,0.5);
                     v2.width = this.localBoardPosition.DrawSize.unitSize * this.BoardScale.OrbRadius;
@@ -254,10 +269,22 @@ class StarBoard{
         );
     }
 
+    //アップデート設定
     setUpdate() {
         this.app.ticker.add((delta)=>{
+            if(this.BoardInfo.changeQueue.length > 0){
+                const vertex = this.BoardInfo.changeQueue.shift();
 
+                [this.OrbPositions[0][vertex],this.OrbPositions[1][vertex],this.OrbPositions[2][vertex]] = [this.OrbPositions[1][vertex],this.OrbPositions[2][vertex],this.OrbPositions[0][vertex]]
+
+                this.sprites.forEach((v,i,a)=>{
+                    v.forEach((v2,i2,a2)=>{
+                        v2.position.set(this.OrbPositions[i][i2].x,this.OrbPositions[i][i2].y);
+                    })
+                })
+            }
         })
+        
     }
 }
 
@@ -265,4 +292,5 @@ let sb = new StarBoard();
 sb.Initialise();
 sb.setLocalize();
 sb.setDraw();
+sb.setUpdate();
 console.log(sb);
