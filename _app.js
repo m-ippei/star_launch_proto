@@ -1,3 +1,5 @@
+let queue = 0;
+
 class StarBoard{
     constructor(){
         /**
@@ -22,8 +24,10 @@ class StarBoard{
         this.OrbPositions = [];
 
         //デバイスのための座標格納(定数・初期化後参照のみ)
-        this.localBoardPosition = {}
+        this.localBoardPosition = {};
 
+        //ボード情報
+        this.BoardInfo = {};
         //オーブの色　ファイル名（参照のみ）
         this.OrbColors = [];
         //参照オーブスプライトの格納
@@ -48,6 +52,11 @@ class StarBoard{
         this.sprites = this._3x5Array.map((arr)=>arr.slice().fill(null));
         this.colors = this._3x5Array.map((arr)=>arr.slice());
         this.OrbPositions = this._3x5Array.map((arr)=>arr.slice());
+
+        this.BoardInfo = {
+            "changeQueue":[],
+            "count":0
+        }
 
         this.OrbColors = [
             "blue.png",
@@ -214,12 +223,7 @@ class StarBoard{
         this.Orb_InitialPositions = this.OrbPositions.map((arr)=>arr.slice());
     }
 
-    rotateOrb(vertex){
-        //vertexは1~5の引数を取る
-        const [a,b,c] = [OrbPositions[0][vertex],OrbPositions[1][vertex],OrbPositions[2][vertex]];
-        [c,b,a] = [a,b,c];
-        [OrbPositions[0][vertex],OrbPositions[1][vertex],OrbPositions[2][vertex]] = [c,b,a];
-    }
+    
 
     setDraw() {
         PIXI.Loader.shared.add("images/orbs.json").load((loder, resources) => {
@@ -248,7 +252,11 @@ class StarBoard{
 
             this.sprites.forEach((v,i,a)=>{
                 v.forEach((v2,i2,a2)=>{
-                    v2.on("pointerdown",this.rotateOrb(i));
+                    v2.interactive = true;
+                    v2.on("pointerdown",(()=>{
+                        this.BoardInfo.changeQueue.push(i);
+                        //console.log(this.BoardInfo.changeQueue);
+                    }));
                     v2.position.set(this.OrbPositions[i][i2].x,this.OrbPositions[i][i2].y);
                     v2.anchor.set(0.5,0.5);
                     v2.width = this.localBoardPosition.DrawSize.unitSize * this.BoardScale.OrbRadius;
@@ -264,8 +272,52 @@ class StarBoard{
 
     setUpdate() {
         this.app.ticker.add((delta)=>{
-            
+            if(this.BoardInfo.changeQueue.length > 0){
+                //console.log(this.BoardInfo.changeQueue);
+                //console.log("a");
+                //console.log(this.BoardInfo.changeQueue);
+                const vertex = this.BoardInfo.changeQueue.shift();
+                //console.log(this.BoardInfo.changeQueue);
+                console.log(this.OrbPositions);
+                
+
+                [this.OrbPositions[0][vertex],this.OrbPositions[1][vertex],this.OrbPositions[2][vertex]] = [this.OrbPositions[1][vertex],this.OrbPositions[2][vertex],this.OrbPositions[0][vertex]]
+                
+                console.log(this.OrbPositions);
+                //console.log(this.BoardInfo.changeQueue);
+                //console.log(this.BoardInfo.changeQueue);
+
+                this.sprites.forEach((v,i,a)=>{
+                    v.forEach((v2,i2,a2)=>{
+                        v2.position.set(this.OrbPositions[i][i2].x,this.OrbPositions[i][i2].y);
+                    })
+                })
+            }
+            /*
+            while(queue.length > 0){
+                let vertex =    queue.shift();
+                [this.OrbPositions[0][vertex],this.OrbPositions[1][vertex],this.OrbPositions[2][vertex]] = [this.OrbPositions[1][vertex],this.OrbPositions[2][vertex],this.OrbPositions[0][vertex]]
+                /*
+                let vertex = null;
+
+        if(this.BoardInfo.ChangeQueue.length > 0){
+            vertex = this.BoardInfo.ChangeQueue.shift();
+        }
+
+       [this.OrbPositions[0][vertex],this.OrbPositions[1][vertex],this.OrbPositions[2][vertex]] = [this.OrbPositions[1][vertex],this.OrbPositions[2][vertex],this.OrbPositions[0][vertex]]
+                
+            }
+
+            if(queue.length > 0){
+                this.sprites.forEach((v,i,a)=>{
+                    v.forEach((v2,i2,a2)=>{
+                        v2.position.set(this.OrbPositions[i][i2].x,this.OrbPositions[i][i2].y);
+                    })
+                })
+            }
+           */ 
         })
+        
     }
 }
 
@@ -273,4 +325,5 @@ let sb = new StarBoard();
 sb.Initialise();
 sb.setLocalize();
 sb.setDraw();
+sb.setUpdate();
 console.log(sb);
