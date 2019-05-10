@@ -305,11 +305,8 @@ class StarBoard{
         this.app.ticker.add((delta)=>{
             if(this.BoardInfo.changeQueue.length > 0){
                 const vertex = this.BoardInfo.changeQueue.shift();
-                //const op = this.OrbPositions;
                 const op = this.Orb_InitialPositions;
 
-                //[op.pos[0][vertex],op.pos[1][vertex],op.pos[2][vertex]] = [op.pos[1][vertex],op.pos[2][vertex],op.pos[0][vertex]];
-                //[op.color[0][vertex],op.color[1][vertex],op.color[2][vertex]] = [op.color[2][vertex],op.color[0][vertex],op.color[1][vertex]];
                 [this.sprites[0][vertex],this.sprites[1][vertex],this.sprites[2][vertex]] = [this.sprites[2][vertex],this.sprites[0][vertex],this.sprites[1][vertex]];
 
                 this.sprites.forEach((v,i,a)=>{
@@ -326,12 +323,10 @@ class StarBoard{
                     return v._texture.textureCacheIds[0];
                 });
 
-                //console.log(_arr);
-
                 //星の頂点をオブジェクト形式で保存する
                 const _lists = {};
                 
-                
+
                 _arr.forEach((v,i,a)=>{
                     if(_lists.hasOwnProperty(v)){
                         _lists[v] += 1
@@ -353,16 +348,6 @@ class StarBoard{
                     return v[0];
                 })
 
-                //console.log(_disable_arr);
-
-                for(let i = 0;i<5;i++){
-                    //console.log(this.sprites[0][i]._texture.textureCacheIds[0])
-                }
-                //console.log(this.sprites[0]);
-                //console.log(_disable_arr);
-
-
-
                 this.sprites[0].forEach((v,i,a)=>{
                     _disable_arr.forEach((v2,i2,a2)=>{
                         if(v._texture.textureCacheIds[0] === v2){
@@ -370,33 +355,6 @@ class StarBoard{
                         }
                     })
                 })
-
-                /*
-                for(let i = 0;i<5;i++){
-                    console.log(this.sprites[0][i]._texture.textureCacheIds[0])
-                }
-                */
-
-                
-
-                //this.BoardInfo.connectMode = false;
-                
-
-                /*
-                this.sprites.forEach((v,i,a)=>{
-
-                })
-                */
-
-                //console.log(this.sprites[0][0]._texture.textureCacheIds[0]);
-
-                /*
-                this.sprites[0][0].visible = false;
-
-                this.BoardInfo.connectMode = false;
-                */
-
-                
             }
         })
     }
