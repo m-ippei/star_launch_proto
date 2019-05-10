@@ -64,7 +64,11 @@ class StarBoard{
                 "text":"",
                 "style":null,
                 "texture":null,
-                "update":false
+                "update":false,
+                "text_style":{
+                    fontFamily: "monospace",
+                    fontSize: 200
+                }
             },
             "changeQueue":[],
             "connectMode":false
@@ -248,10 +252,7 @@ class StarBoard{
 
     //描画設定
     setDraw() {
-        this.BoardInfo.message.style = new PIXI.TextStyle({
-            fontFamily: "Impact",
-            fontSize: 200
-        });
+        this.BoardInfo.message.style = new PIXI.TextStyle(this.BoardInfo.message.text_style);
         this.BoardInfo.texture = new PIXI.Text(this.BoardInfo.message.text,this.BoardInfo.message.style);
         this.BoardInfo.texture.position.set(this.BoardScale.TextPosition.x*this.localBoardPosition.DrawSize.unitSize,this.BoardScale.TextPosition.y*this.localBoardPosition.DrawSize.unitSize);
         this.BoardInfo.texture.anchor.set(0.5,0.5);
@@ -390,10 +391,7 @@ class StarBoard{
         this.app.ticker.add((delta)=>{
             if(this.BoardInfo.message.update){
                 this.app.stage.removeChild(this.BoardInfo.texture);
-                this.BoardInfo.message.style = new PIXI.TextStyle({
-                    fontFamily: "Impact",
-                    fontSize: 200
-                });
+                this.BoardInfo.message.style = new PIXI.TextStyle(this.BoardInfo.message.text_style);
                 this.BoardInfo.texture = new PIXI.Text(this.BoardInfo.message.text,this.BoardInfo.message.style);
                 this.BoardInfo.texture.position.set(this.BoardScale.TextPosition.x*this.localBoardPosition.DrawSize.unitSize,this.BoardScale.TextPosition.y*this.localBoardPosition.DrawSize.unitSize);
                 this.BoardInfo.texture.anchor.set(0.5,0.5);
