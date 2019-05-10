@@ -81,7 +81,7 @@ class StarBoard{
             },
             "InnerCircleRadius":2.7,
             "OrbPositionCircleRadius":0.9,
-            "OrbRadius":1.7
+            "OrbRadius":2
         }
 
         //デバイスのための座標格納
@@ -305,19 +305,100 @@ class StarBoard{
         this.app.ticker.add((delta)=>{
             if(this.BoardInfo.changeQueue.length > 0){
                 const vertex = this.BoardInfo.changeQueue.shift();
-                const op = this.OrbPositions;
+                //const op = this.OrbPositions;
+                const op = this.Orb_InitialPositions;
 
-                [op.pos[0][vertex],op.pos[1][vertex],op.pos[2][vertex]] = [op.pos[1][vertex],op.pos[2][vertex],op.pos[0][vertex]];
-                [op.color[0][vertex],op.color[1][vertex],op.color[2][vertex]] = [op.color[2][vertex],op.color[0][vertex],op.color[1][vertex]];
+                //[op.pos[0][vertex],op.pos[1][vertex],op.pos[2][vertex]] = [op.pos[1][vertex],op.pos[2][vertex],op.pos[0][vertex]];
+                //[op.color[0][vertex],op.color[1][vertex],op.color[2][vertex]] = [op.color[2][vertex],op.color[0][vertex],op.color[1][vertex]];
+                [this.sprites[0][vertex],this.sprites[1][vertex],this.sprites[2][vertex]] = [this.sprites[2][vertex],this.sprites[0][vertex],this.sprites[1][vertex]];
 
                 this.sprites.forEach((v,i,a)=>{
                     v.forEach((v2,i2,a2)=>{
-                        v2.position.set(op.pos[i][i2].x,op.pos[i][i2].y);
+                        v2.position.set(op[i][i2].x,op[i][i2].y);
                     })
                 })
             }
+
+            if(this.BoardInfo.connectMode){
+                
+                //星の頂点の色情報のみ保存する
+                const _arr = this.sprites[0].map((v,i,a)=>{
+                    return v._texture.textureCacheIds[0];
+                });
+
+                //console.log(_arr);
+
+                //星の頂点をオブジェクト形式で保存する
+                const _lists = {};
+                
+                
+                _arr.forEach((v,i,a)=>{
+                    if(_lists.hasOwnProperty(v)){
+                        _lists[v] += 1
+                    }else{
+                        _lists[v] = 1;
+                    }
+                })
+
+                //オブジェクト形式にしたものを配列にする
+                let _lists_arr = Object.entries(_lists);
+
+                //同じ色が２つ以上あるものだけ残す。
+                _lists_arr = _lists_arr.filter((v,i,a)=>{
+                    return v[1] > 1;
+                })
+
+                //色の文字列だけにする。
+                const _disable_arr = _lists_arr.map((v,i,a)=>{
+                    return v[0];
+                })
+
+                //console.log(_disable_arr);
+
+                for(let i = 0;i<5;i++){
+                    //console.log(this.sprites[0][i]._texture.textureCacheIds[0])
+                }
+                //console.log(this.sprites[0]);
+                //console.log(_disable_arr);
+
+
+
+                this.sprites[0].forEach((v,i,a)=>{
+                    _disable_arr.forEach((v2,i2,a2)=>{
+                        if(v._texture.textureCacheIds[0] === v2){
+                            v.visible = false;
+                        }
+                    })
+                })
+
+                /*
+                for(let i = 0;i<5;i++){
+                    console.log(this.sprites[0][i]._texture.textureCacheIds[0])
+                }
+                */
+
+                
+
+                //this.BoardInfo.connectMode = false;
+                
+
+                /*
+                this.sprites.forEach((v,i,a)=>{
+
+                })
+                */
+
+                //console.log(this.sprites[0][0]._texture.textureCacheIds[0]);
+
+                /*
+                this.sprites[0][0].visible = false;
+
+                this.BoardInfo.connectMode = false;
+                */
+
+                
+            }
         })
-        
     }
 }
 
