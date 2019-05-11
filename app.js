@@ -66,8 +66,10 @@ class StarBoard{
                 "texture":null,
                 "update":false,
                 "text_style":{
-                    fontFamily: "monospace",
-                    fontSize: 200
+                    align:"center",
+                    fontFamily: "Kosugi Maru",
+                    fontSize: 200,
+                    wordWrap:true
                 }
             },
             "changeQueue":[],
