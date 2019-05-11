@@ -256,7 +256,7 @@ class StarBoard{
     setDraw() {
         this.BoardInfo.message.style = new PIXI.TextStyle(this.BoardInfo.message.text_style);
         this.BoardInfo.texture = new PIXI.Text(this.BoardInfo.message.text,this.BoardInfo.message.style);
-        this.BoardInfo.texture.position.set(this.BoardScale.TextPosition.x*this.localBoardPosition.DrawSize.unitSize,this.BoardScale.TextPosition.y*this.localBoardPosition.DrawSize.unitSize);
+        this.BoardInfo.texture.position.set(this.localBoardPosition.DrawSize.TopWidth+(this.BoardScale.TextPosition.x*this.localBoardPosition.DrawSize.unitSize),this.localBoardPosition.DrawSize.TopHeight+(this.BoardScale.TextPosition.y*this.localBoardPosition.DrawSize.unitSize));
         this.BoardInfo.texture.anchor.set(0.5,0.5);
         this.BoardInfo.texture.width = this.BoardScale.TextPosition.width * this.localBoardPosition.DrawSize.unitSize;
         this.BoardInfo.texture.height = this.BoardScale.TextPosition.height * this.localBoardPosition.DrawSize.unitSize;
@@ -395,7 +395,7 @@ class StarBoard{
                 this.app.stage.removeChild(this.BoardInfo.texture);
                 this.BoardInfo.message.style = new PIXI.TextStyle(this.BoardInfo.message.text_style);
                 this.BoardInfo.texture = new PIXI.Text(this.BoardInfo.message.text,this.BoardInfo.message.style);
-                this.BoardInfo.texture.position.set(this.BoardScale.TextPosition.x*this.localBoardPosition.DrawSize.unitSize,this.BoardScale.TextPosition.y*this.localBoardPosition.DrawSize.unitSize);
+                this.BoardInfo.texture.position.set(this.localBoardPosition.DrawSize.TopWidth+(this.BoardScale.TextPosition.x*this.localBoardPosition.DrawSize.unitSize),this.localBoardPosition.DrawSize.TopHeight+(this.BoardScale.TextPosition.y*this.localBoardPosition.DrawSize.unitSize));
                 this.BoardInfo.texture.anchor.set(0.5,0.5);
                 this.BoardInfo.texture.width = this.BoardScale.TextPosition.width * this.localBoardPosition.DrawSize.unitSize;
                 this.BoardInfo.texture.height = this.BoardScale.TextPosition.height * this.localBoardPosition.DrawSize.unitSize;
