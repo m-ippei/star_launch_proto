@@ -14,47 +14,54 @@ class StarBoard{
          *   a[i][j]のiは星の深さ、jは星の位置
          */
 
+
+        
         //スプライト情報格納 3*5
+        // public
         this.sprites = [];
-        //色情報の格納 3*5
-        this.colors = [];
-        //オーブの情報を格納　スプライトの座標と色の配置　座標は3*5 (配列内は{"x":0,"y":0}で初期化)
-        this.OrbPositions = {};
+        //オーブの配置情報を格納　座標は3*5 (配列内は{"x":0,"y":0}で初期化)
+        // public
+        this.OrbPositions = [];
+
+
         //中央の星
+        // private
         this.Star = null;
 
         //デバイスのための座標格納(定数・初期化後参照のみ)
+        // private
         this.localBoardPosition = {};
 
         //ボード情報
+        // private
         this.BoardInfo = {};
         //オーブの色　ファイル名（参照のみ）
+        // private
         this.OrbColors = [];
-        //参照オーブスプライトの格納
-        this.Orb = [];
         //オーブの初期位置の保持
+        // private
         this.Orb_InitialPositions;
         //デバイス非依存の座標スケール(定数・参照のみ)
+        // public
         this.BoardScale = {};
         //オーブ配置のラジアン（定数・参照のみ）
+        // public
         this.InnerCircleRad = [];
         //オーブ配置のラジアン (定数・参照のみ)
+        // public
         this.OuterPositionCircleRad = [];
         
     }
 
-    Initialise() {
+    Initialize() {
 
         //2次配列の初期化テンプレート
         this._3x5Array = new Array(3).fill(new Array(5).fill(0));
 
         //nullまたは0の2次配列で初期化
         this.sprites = this._3x5Array.map((arr)=>arr.slice().fill(null));
-        this.colors = this._3x5Array.map((arr)=>arr.slice());
-        this.OrbPositions = {
-            "pos":this._3x5Array.map((arr)=>arr.slice()),
-            "color":this._3x5Array.map((arr)=>arr.slice())
-        }
+
+        this.OrbPositions = this._3x5Array.map((arr)=>arr.slice());
 
         //中央の星のグラフィックス情報
         this.Star = null;
@@ -220,36 +227,36 @@ class StarBoard{
         this.localBoardPosition.InnerCircleCenterPosition = _tmpIPOS;
         _icp = this.localBoardPosition.InnerCircleCenterPosition;
         
-        let _tmpOrbPostions = this.OrbPositions.pos[0].map((v,i,a)=>{
+        let _tmpOrbPostions = this.OrbPositions[0].map((v,i,a)=>{
             return {
                 "x":_bc.x + (_cos(_ir[i])*(_bs.InnerCircleRadius - _bs.OrbPositionCircleRadius) * _ds.unitSize),
                 "y":_bc.y + (-1*_sin(_ir[i])*(_bs.InnerCircleRadius - _bs.OrbPositionCircleRadius) * _ds.unitSize)
             }
         })
 
-        this.OrbPositions.pos[0] = _tmpOrbPostions;
+        this.OrbPositions[0] = _tmpOrbPostions;
 
         const _or = this.OuterPositionCircleRad;
 
-        _tmpOrbPostions = this.OrbPositions.pos[1].map((v,i,a)=>{
+        _tmpOrbPostions = this.OrbPositions[1].map((v,i,a)=>{
             return {
                 "x":_icp[i].x + (_cos(_or[i][0])* _bs.OrbPositionCircleRadius * _ds.unitSize),
                 "y":_icp[i].y + (-1*_sin(_or[i][0])* _bs.OrbPositionCircleRadius * _ds.unitSize)
             }
         })
 
-        this.OrbPositions.pos[1] = _tmpOrbPostions;
+        this.OrbPositions[1] = _tmpOrbPostions;
 
-        _tmpOrbPostions = this.OrbPositions.pos[2].map((v,i,a)=>{
+        _tmpOrbPostions = this.OrbPositions[2].map((v,i,a)=>{
             return {
                 "x":_icp[i].x + (_cos(_or[i][1])* _bs.OrbPositionCircleRadius * _ds.unitSize),
                 "y":_icp[i].y + (-1*_sin(_or[i][1])* _bs.OrbPositionCircleRadius * _ds.unitSize)
             }
         })
 
-        this.OrbPositions.pos[2] = _tmpOrbPostions;
+        this.OrbPositions[2] = _tmpOrbPostions;
 
-        this.Orb_InitialPositions = this.OrbPositions.pos.map((arr)=>arr.slice());
+        this.Orb_InitialPositions = this.OrbPositions.map((arr)=>arr.slice());
     }
 
     //描画設定
@@ -284,19 +291,15 @@ class StarBoard{
             
             const sheet = resources["images/orbs.json"].spritesheet;
            
-            this.Orb = this.OrbColors.map((v,i,a)=>{
-                return new PIXI.Sprite(sheet.textures[v]);
-            })
-
             let _arr = this._3x5Array.map((arr)=>arr.slice());
-            this.OrbPositions.color = _arr.map((v)=>{
+            let _color = _arr.map((v)=>{
                 const tmpArr = v.map((v2)=>{
                     return this.OrbColors[Math.floor(Math.random()*this.OrbColors.length)];
                 })
                 return tmpArr;
             })
 
-            this.sprites = this.OrbPositions.color.map((v,i,a)=>{
+            this.sprites = _color.map((v,i,a)=>{
                 const tmpArr = v.map((v2,i2,a2)=>{
                     const sprite = new PIXI.Sprite(sheet.textures[v2]);
                     return sprite;
@@ -312,7 +315,7 @@ class StarBoard{
                             this.BoardInfo.changeQueue.push(i2);
                         }
                     }));
-                    v2.position.set(this.OrbPositions.pos[i][i2].x,this.OrbPositions.pos[i][i2].y);
+                    v2.position.set(this.OrbPositions[i][i2].x,this.OrbPositions[i][i2].y);
                     v2.anchor.set(0.5,0.5);
                     v2.width = this.localBoardPosition.DrawSize.unitSize * this.BoardScale.OrbRadius;
                     v2.height = this.localBoardPosition.DrawSize.unitSize * this.BoardScale.OrbRadius;
@@ -407,7 +410,7 @@ class StarBoard{
 }
 
 let sb = new StarBoard();
-sb.Initialise();
+sb.Initialize();
 sb.setLocalize();
 sb.setDraw();
 sb.setUpdate();
