@@ -26,9 +26,9 @@ function setDraw() {
     APP.stage.addChild(STAR);
 
     //オーブの描画
-    PIXI.Loader.shared.add("images/orbs.json").load((loder, resources) => {
+    PIXI.Loader.shared.add("images/sprites.json").load((loder, resources) => {
         
-        const sheet = resources["images/orbs.json"].spritesheet;
+        const sheet = resources["images/sprites.json"].spritesheet;
        
         let _arr = util_3x5Array.map((arr)=>arr.slice());
         let _color = _arr.map((v)=>{

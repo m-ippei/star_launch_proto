@@ -26,7 +26,7 @@ const BOARDSCALE = {
     },
     "InnerCircleRadius":2.7,
     "OrbPositionCircleRadius":0.9,
-    "OrbRadius":2
+    "OrbRadius":1.4
 }
 
 /**
