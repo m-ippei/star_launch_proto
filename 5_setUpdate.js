@@ -1,6 +1,4 @@
 //アップデート設定
-
-
 function setUpdate() {
     MAIN.ticker.add((delta)=>{
         if(BOARDINFO.changeQueue.length > 0){
@@ -35,28 +33,22 @@ function setUpdate() {
                 }
             })
 
-            //console.log(_lists)
-
             //オブジェクト形式にしたものを配列にする
             let _lists_arr = Object.entries(_lists);
-
-            
 
             //同じ色が２つ以上あるものだけ残す。
             _lists_arr = _lists_arr.filter((v,i,a)=>{
                 return v[1] > 1;
             })
 
-            
-            //console.log(_lists_arr.length);
-
-            //console.log(_lists_arr[0]);
-
             if(_lists_arr.length === 0){
                 CHAIN = 0;
                 BOARDINFO.message.text = ""
                 BOARDINFO.message.update = true;
-                console.log("No Pair")
+                MAIN.renderer.view.hidden = true;
+                RESULT.renderer.view.hidden = false;
+                BOARDINFO.SCORE.update = true;
+                //console.log("No Pair")
             }else if(_lists_arr.length === 1){
                 if(_lists_arr[0][1] === 2){
                     BOARDINFO.SCORE.score += (100+(100*CHAIN*0.25))
@@ -143,24 +135,21 @@ function setUpdate() {
             BOARDINFO.message.texture = new PIXI.Text(BOARDINFO.message.text,BOARDINFO.message.style);
             BOARDINFO.message.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
             BOARDINFO.message.texture.anchor.set(0.5,0.5);
-            //BOARDINFO.message.texture.anchor.set(1,1);
-            //BOARDINFO.texture.width = BOARDSCALE.TextPosition.width * LOCALBOARDPOSITION.DrawSize.unitSize;
-            //BOARDINFO.texture.height = BOARDSCALE.TextPosition.height * LOCALBOARDPOSITION.DrawSize.unitSize;
             MAIN.stage.addChild(BOARDINFO.message.texture);
             BOARDINFO.message.update = false;
         }
     })
 
     RESULT.ticker.add((delta)=>{
-        RESULT.stage.removeChild(BOARDINFO.SCORE.texture);
-        BOARDINFO.SCORE.style = new PIXI.TextStyle(BOARDINFO.SCORE.text_style);
-        BOARDINFO.SCORE.texture = new PIXI.Text(BOARDINFO.SCORE.score,BOARDINFO.SCORE.style);
-        BOARDINFO.SCORE.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
-        BOARDINFO.SCORE.texture.anchor.set(0.5,0.5);
-            //BOARDINFO.message.texture.anchor.set(1,1);
-            //BOARDINFO.texture.width = BOARDSCALE.TextPosition.width * LOCALBOARDPOSITION.DrawSize.unitSize;
-            //BOARDINFO.texture.height = BOARDSCALE.TextPosition.height * LOCALBOARDPOSITION.DrawSize.unitSize;
-        RESULT.stage.addChild(BOARDINFO.SCORE.texture);
+        if(BOARDINFO.SCORE.update){
+            RESULT.stage.removeChild(BOARDINFO.SCORE.texture);
+            BOARDINFO.SCORE.style = new PIXI.TextStyle(BOARDINFO.SCORE.text_style);
+            BOARDINFO.SCORE.texture = new PIXI.Text(BOARDINFO.SCORE.score,BOARDINFO.SCORE.style);
+            BOARDINFO.SCORE.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
+            BOARDINFO.SCORE.texture.anchor.set(0.5,0.5);
+            RESULT.stage.addChild(BOARDINFO.SCORE.texture);
+        }
+        
     })
 }
 
@@ -168,5 +157,4 @@ function MainTextUpdater(text){
     CHAIN += 1;
     BOARDINFO.message.text = text + ` ${CHAIN}CHAIN`;
     BOARDINFO.message.update = true;
-    //console.log(text);
 }

@@ -48,14 +48,6 @@ function main(){
     bg.width = LOCALBOARDPOSITION.DrawSize.unitSize * 9;
     bg.height = LOCALBOARDPOSITION.DrawSize.unitSize * 16;
     MAIN.stage.addChild(bg);
-
-    /*
-    const board = new PIXI.Sprite(SHEET.textures["board.png"]);
-    board.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight+(LOCALBOARDPOSITION.DrawSize.unitSize*7));
-    board.width = LOCALBOARDPOSITION.DrawSize.unitSize * 9;
-    board.height = LOCALBOARDPOSITION.DrawSize.unitSize * 9;
-    MAIN.stage.addChild(board);
-    */
     
     __result = new PIXI.Sprite(SHEET.textures["result.png"])
 
@@ -63,8 +55,7 @@ function main(){
     __result.on('pointerdown',()=>{
         MAIN.renderer.view.hidden = true;
         RESULT.renderer.view.hidden = false;
-        //BOARDINFO.SCORE.text = BOARDINFO.SCORE.score;
-        //BOARDINFO.message.update = true;
+        BOARDINFO.SCORE.update = true;
     })
 
     document.body.appendChild(MAIN.view);
@@ -137,19 +128,7 @@ function main(){
 
 
 function result(){
-    /*
-    const sprite = new PIXI.Sprite(SHEET.textures["back_to_title.png"]);
-
-    sprite.interactive = true;
-    sprite.on('pointerdown',()=>{
-        RESULT.renderer.view.hidden = true;
-        TITLE.renderer.view.hidden = false;
-    })
-
     
-    document.body.appendChild(RESULT.view);
-    RESULT.stage.addChild(sprite);
-    */
     const bg = new PIXI.Sprite(SHEET.textures["title_back.png"]);
     const result = new PIXI.Sprite(SHEET.textures["result.png"]);
     const BTT = new PIXI.Sprite(SHEET.textures["back_to_title.png"]);
@@ -168,33 +147,20 @@ function result(){
 
     result.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(LOCALBOARDPOSITION.DrawSize.unitSize * 4.5),LOCALBOARDPOSITION.DrawSize.TopHeight+(LOCALBOARDPOSITION.DrawSize.unitSize*1));
     result.anchor.set(0.5,0.5);
-    //BTT.width = LOCALBOARDPOSITION.DrawSize.unitSize * 2.72;
-    //BTT.height = LOCALBOARDPOSITION.DrawSize.unitSize * 0.901;
 
     BTT.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.CENTER.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.CENTER.y*LOCALBOARDPOSITION.DrawSize.unitSize));
     BTT.anchor.set(0.5,0.5);
     BTT.width = LOCALBOARDPOSITION.DrawSize.unitSize * 4.5;
     BTT.height = LOCALBOARDPOSITION.DrawSize.unitSize * 2.1;
 
-    
-    
-
     RESULT.stage.addChild(bg);
     RESULT.stage.addChild(result);
     RESULT.stage.addChild(BTT);
 
-    //BOARDINFO.message.text = SCORE;
-
-    //BOARDINFO.message.texture = new PIXI.Text(BOARDINFO.message.text);
-    //BOARDINFO.message.texture = new PIXI.Text("");
     BOARDINFO.SCORE.style = new PIXI.TextStyle(BOARDINFO.SCORE.text_style);
     BOARDINFO.SCORE.texture = new PIXI.Text(BOARDINFO.SCORE.text,BOARDINFO.SCORE.style);
     BOARDINFO.SCORE.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
     BOARDINFO.SCORE.texture.anchor.set(0.5,0.5);
-    //BOARDINFO.message.texture.anchor.set(1,1);
-    //BOARDINFO.texture.width = BOARDSCALE.TextPosition.width * LOCALBOARDPOSITION.DrawSize.unitSize;
-    //BOARDINFO.texture.height = BOARDSCALE.TextPosition.height * LOCALBOARDPOSITION.DrawSize.unitSize;
-    //RESULT.stage.addChild(BOARDINFO.message.texture);
     RESULT.stage.addChild(BOARDINFO.SCORE.texture);
 
     document.body.appendChild(RESULT.view);
