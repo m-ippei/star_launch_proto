@@ -1,4 +1,6 @@
 //描画設定
+
+/*
 function setDraw() {
     BOARDINFO.message.style = new PIXI.TextStyle(BOARDINFO.message.text_style);
     BOARDINFO.texture = new PIXI.Text(BOARDINFO.message.text,BOARDINFO.message.style);
@@ -64,3 +66,4 @@ function setDraw() {
     }
     );
 }
+*/

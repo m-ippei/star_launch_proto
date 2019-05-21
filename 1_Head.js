@@ -100,7 +100,13 @@ let LOCALBOARDPOSITION = {
 // 変数
 
 //アプリケーション
-let APP = null;
+let app = null;
+
+//シーン
+let TITLE = null;
+let MAIN = null;
+let RESULT = null;
+
 //スプライト情報格納 3*5
 let SPRITES = [];
 //オーブの配置情報を格納　座標は3*5 (配列内は{"x":0,"y":0}で初期化)
@@ -110,6 +116,10 @@ let STAR = null;
 let ORB_INITIALPOSITIONS = [];
 
 //定数
+
+// spritesheetの画像データ
+SHEET = null;
+
 //ウィンドウサイズのエイリアス
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;

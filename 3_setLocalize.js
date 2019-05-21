@@ -1,6 +1,10 @@
 //デバイス固有の座標群設定
 function setLocalize() {
 
+    //nullまたは0の2次配列で初期化
+    SPRITES = util_3x5Array.map((arr)=>arr.slice().fill(null));
+    ORBPOSITIONS = util_3x5Array.map((arr)=>arr.slice());
+
     const _ds = LOCALBOARDPOSITION.DrawSize;
     _ds.unitSize = setLocalSize_9x16(WIDTH,HEIGHT);
     const _arr = returnleftTopANDRightTop_9x16(WIDTH,HEIGHT,_ds.unitSize);
