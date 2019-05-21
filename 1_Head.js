@@ -99,9 +99,6 @@ let LOCALBOARDPOSITION = {
 
 // 変数
 
-//アプリケーション
-let app = null;
-
 //シーン
 let TITLE = null;
 let MAIN = null;

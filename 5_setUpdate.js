@@ -1,6 +1,6 @@
 //アップデート設定
 function setUpdate() {
-    APP.ticker.add((delta)=>{
+    MAIN.ticker.add((delta)=>{
         if(BOARDINFO.changeQueue.length > 0){
             const vertex = BOARDINFO.changeQueue.shift();
             const op = ORB_INITIALPOSITIONS;
@@ -62,6 +62,8 @@ function setUpdate() {
         }
     })
 
+    /*
+
     APP.ticker.add((delta)=>{
         if(BOARDINFO.message.update){
             APP.stage.removeChild(BOARDINFO.texture);
@@ -75,4 +77,5 @@ function setUpdate() {
             BOARDINFO.message.update = false;
         }
     })
+    */
 }
