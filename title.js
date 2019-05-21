@@ -82,6 +82,11 @@ function main(){
         })
 
     
+    
+
+    BOARDINFO.message.texture = new PIXI.Text(BOARDINFO.message.text);
+    MAIN.stage.addChild(BOARDINFO.message.texture);
+
     document.body.appendChild(MAIN.view);
 }
 

@@ -68,8 +68,7 @@ let BOARDINFO = {
         "text_style":{
             align:"center",
             fontFamily: "Kosugi Maru",
-            fontSize: 200,
-            wordWrap:true
+            fontSize: 120
         }
     },
     "changeQueue":[],
@@ -115,6 +114,9 @@ let ORB_INITIALPOSITIONS = [];
 
 //メイン画面からの移行用
 let __result = null;
+
+//連鎖数
+let CHAIN = 0;
 
 //定数
 

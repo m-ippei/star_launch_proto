@@ -36,7 +36,5 @@ function Initialize(name,isHidden){
     app.renderer.view.id = name;
     app.renderer.view.hidden = isHidden;
 
-    
-
     return app;
 }

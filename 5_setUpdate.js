@@ -1,4 +1,6 @@
 //アップデート設定
+
+
 function setUpdate() {
     MAIN.ticker.add((delta)=>{
         if(BOARDINFO.changeQueue.length > 0){
@@ -51,37 +53,23 @@ function setUpdate() {
             //console.log(_lists_arr[0]);
 
             if(_lists_arr.length === 0){
+                CHAIN = 0;
+                BOARDINFO.message.text = ""
+                BOARDINFO.message.update = true;
                 console.log("No Pair")
             }else if(_lists_arr.length === 1){
                 if(_lists_arr[0][1] === 2){
-                    console.log("1 Pair")
+                    MainTextUpdater("1 Pair");
                 }else if(_lists_arr[0][1] === 3){
-                    console.log("3 Orbs!")
+                    MainTextUpdater("3 Orbs");
                 }else if(_lists_arr[0][1] === 4){
-                    console.log("4 Orbs!")
+                    MainTextUpdater("4 Orbs");
                 }else if(_lists_arr[0][1] === 5){
-                    console.log("Star!")
+                    MainTextUpdater("Star!");
                 }
             }else if(_lists_arr.length === 2){
-                console.log("23!")
+                MainTextUpdater("23!");
             }
-
-            /*
-            if(_lists_arr.length > 1){
-                console.log("23!")
-            }else if(_lists_arr.length = 0){
-                if(_lists_arr[0][1]===2){
-                    console.log("1 pair")
-                }else if(_lists_arr[0][1]===3){
-                    console.log("3 orbs!")
-                }else if(_lists_arr[0][1]===4){
-                    console.log("4 orbs!")
-                }else if(_lists_arr[0][1]===5){
-                    console.log("Star!")
-                }
-            }
-            */
-            
 
             //色の文字列だけにする。
             const _disable_arr = _lists_arr.map((v,i,a)=>{
@@ -133,7 +121,6 @@ function setUpdate() {
                     SPRITES[0][i].width = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
                     SPRITES[0][i].height = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
                     MAIN.stage.addChild(SPRITES[0][i]);
-                    //console.log(v2)
                 }
             })
 
@@ -143,20 +130,28 @@ function setUpdate() {
         }
     })
 
-    /*
+    
 
-    APP.ticker.add((delta)=>{
+    MAIN.ticker.add((delta)=>{
         if(BOARDINFO.message.update){
-            APP.stage.removeChild(BOARDINFO.texture);
+            MAIN.stage.removeChild(BOARDINFO.message.texture);
             BOARDINFO.message.style = new PIXI.TextStyle(BOARDINFO.message.text_style);
-            BOARDINFO.texture = new PIXI.Text(BOARDINFO.message.text,BOARDINFO.message.style);
-            BOARDINFO.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
-            BOARDINFO.texture.anchor.set(0.5,0.5);
-            BOARDINFO.texture.width = BOARDSCALE.TextPosition.width * LOCALBOARDPOSITION.DrawSize.unitSize;
-            BOARDINFO.texture.height = BOARDSCALE.TextPosition.height * LOCALBOARDPOSITION.DrawSize.unitSize;
-            APP.stage.addChild(BOARDINFO.texture);
+            BOARDINFO.message.texture = new PIXI.Text(BOARDINFO.message.text,BOARDINFO.message.style);
+            BOARDINFO.message.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
+            BOARDINFO.message.texture.anchor.set(0.5,0.5);
+            //BOARDINFO.message.texture.anchor.set(1,1);
+            //BOARDINFO.texture.width = BOARDSCALE.TextPosition.width * LOCALBOARDPOSITION.DrawSize.unitSize;
+            //BOARDINFO.texture.height = BOARDSCALE.TextPosition.height * LOCALBOARDPOSITION.DrawSize.unitSize;
+            MAIN.stage.addChild(BOARDINFO.message.texture);
             BOARDINFO.message.update = false;
         }
     })
-    */
+    
+}
+
+function MainTextUpdater(text){
+    CHAIN += 1;
+    BOARDINFO.message.text = text + ` ${CHAIN}CHAIN`;
+    BOARDINFO.message.update = true;
+    //console.log(text);
 }
