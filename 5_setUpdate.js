@@ -33,13 +33,55 @@ function setUpdate() {
                 }
             })
 
+            //console.log(_lists)
+
             //オブジェクト形式にしたものを配列にする
             let _lists_arr = Object.entries(_lists);
+
+            
 
             //同じ色が２つ以上あるものだけ残す。
             _lists_arr = _lists_arr.filter((v,i,a)=>{
                 return v[1] > 1;
             })
+
+            
+            //console.log(_lists_arr.length);
+
+            //console.log(_lists_arr[0]);
+
+            if(_lists_arr.length === 0){
+                console.log("No Pair")
+            }else if(_lists_arr.length === 1){
+                if(_lists_arr[0][1] === 2){
+                    console.log("1 Pair")
+                }else if(_lists_arr[0][1] === 3){
+                    console.log("3 Orbs!")
+                }else if(_lists_arr[0][1] === 4){
+                    console.log("4 Orbs!")
+                }else if(_lists_arr[0][1] === 5){
+                    console.log("Star!")
+                }
+            }else if(_lists_arr.length === 2){
+                console.log("23!")
+            }
+
+            /*
+            if(_lists_arr.length > 1){
+                console.log("23!")
+            }else if(_lists_arr.length = 0){
+                if(_lists_arr[0][1]===2){
+                    console.log("1 pair")
+                }else if(_lists_arr[0][1]===3){
+                    console.log("3 orbs!")
+                }else if(_lists_arr[0][1]===4){
+                    console.log("4 orbs!")
+                }else if(_lists_arr[0][1]===5){
+                    console.log("Star!")
+                }
+            }
+            */
+            
 
             //色の文字列だけにする。
             const _disable_arr = _lists_arr.map((v,i,a)=>{
@@ -94,67 +136,6 @@ function setUpdate() {
                     //console.log(v2)
                 }
             })
-
-            
-
-
-            //console.log(MAIN.stage.children)
-
-            
-
-            
-
-            /*
-           SPRITES[0].forEach((v,i,a)=>{
-            _disable_arr.forEach((v2,i2,a2)=>{
-                if(v._texture.textureCacheIds[0] === v2){
-                    v = null;
-                }
-            })
-        })
-        */
-
-            /*
-            SPRITES[0].forEach((v,i,a)=>{
-                _disable_arr.forEach((v2,i2,a2)=>{
-                    if(v._texture.textureCacheIds[0] === v2){
-                        //v.visible = false;
-                        // v = null;
-                    }
-                })
-            })
-            */
-
-
-            //console.log(SPRITES)
-            /*
-            SPRITES.forEach((v,i,a)=>{
-                v.forEach((v2,i2,a2)=>{
-                    if(v2.visible === false){
-                        //console.log(v2)
-                        MAIN.stage.removeChild(v2);
-                        v2 = new PIXI.Sprite(SHEET.textures[ORBCOLORS[Math.floor(Math.random()*ORBCOLORS.length)]]);
-                        v2.interactive = true;
-                        v2.on("pointerdown",(()=>{
-                            if(BOARDINFO.connectMode === false){
-                                BOARDINFO.changeQueue.push(i2);
-                            }
-                         }));
-                        v2.position.set(ORB_INITIALPOSITIONS[i][i2].x,ORB_INITIALPOSITIONS[i][i2].y);
-                        v2.anchor.set(0.5,0.5);
-                        v2.width = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
-                        v2.height = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
-                        MAIN.stage.addChild(v2);
-                        //console.log(v2)
-                    }
-                })
-            })
-            */
-
-            //console.log(SPRITES)
-
-            //BOARDINFO.message.update = true;
-            //BOARDINFO.message.text = "CLEAR!"
 
             BOARDINFO.connectMode = false;
 

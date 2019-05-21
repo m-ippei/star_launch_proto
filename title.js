@@ -66,6 +66,7 @@ function main(){
             v.forEach((v2,i2,a2)=>{
                 v2.interactive = true;
                 v2.on("pointerdown",(()=>{
+                    SOUNDS.change.stop();
                     SOUNDS.change.play();
                     if(BOARDINFO.connectMode === false){
                         BOARDINFO.changeQueue.push(i2);
