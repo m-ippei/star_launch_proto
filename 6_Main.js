@@ -12,4 +12,7 @@ PIXI.Loader.shared.onComplete.add(()=>{
 
     setUpdate();
 
+    
+
 })
+

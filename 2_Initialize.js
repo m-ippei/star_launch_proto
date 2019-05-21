@@ -1,5 +1,13 @@
 PIXI.Loader.shared.add("images/sprites.json").load((loader,resources)=>{
     SHEET = resources["images/sprites.json"].spritesheet;
+
+    SOUNDS.change = new Howl({
+        src:['sound/change.mp3']
+    });
+    
+    SOUNDS.star = new Howl({
+        src:['sound/star.mp3']
+    });
 });
 
 

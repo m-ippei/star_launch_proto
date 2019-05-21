@@ -2,6 +2,7 @@
 function setUpdate() {
     MAIN.ticker.add((delta)=>{
         if(BOARDINFO.changeQueue.length > 0){
+            
             const vertex = BOARDINFO.changeQueue.shift();
             const op = ORB_INITIALPOSITIONS;
 
@@ -45,6 +46,15 @@ function setUpdate() {
                 return v[0];
             })
 
+            if(_disable_arr.length > 0){
+                SOUNDS.star.play();
+            }else{
+                STAR.clear();
+                STAR.lineStyle(0);
+                STAR.beginFill(0xEDEAEC,1);
+                STAR.drawStar(LOCALBOARDPOSITION.BoardCenter.x,LOCALBOARDPOSITION.BoardCenter.y,5,LOCALBOARDPOSITION.DrawSize.unitSize*(BOARDSCALE.InnerCircleRadius-BOARDSCALE.OrbPositionCircleRadius));
+            }
+
             
             SPRITES[0].forEach((v,i,a)=>{
                 _disable_arr.forEach((v2,i2,a2)=>{
@@ -84,6 +94,9 @@ function setUpdate() {
                     //console.log(v2)
                 }
             })
+
+            
+
 
             //console.log(MAIN.stage.children)
 

@@ -119,7 +119,13 @@ let __result = null;
 //定数
 
 // spritesheetの画像データ
-SHEET = null;
+let SHEET = null;
+
+//音データ
+let SOUNDS = {
+    change:null,
+    star:null
+}
 
 //ウィンドウサイズのエイリアス
 const WIDTH = window.innerWidth;

@@ -32,6 +32,7 @@ function main(){
     STAR.drawStar(LOCALBOARDPOSITION.BoardCenter.x,LOCALBOARDPOSITION.BoardCenter.y,5,LOCALBOARDPOSITION.DrawSize.unitSize*(BOARDSCALE.InnerCircleRadius-BOARDSCALE.OrbPositionCircleRadius));
     STAR.interactive = true;
     STAR.on("pointerdown",()=>{
+        
         BOARDINFO.connectMode = true;
         STAR.clear();
         STAR.lineStyle(0);
@@ -65,9 +66,11 @@ function main(){
             v.forEach((v2,i2,a2)=>{
                 v2.interactive = true;
                 v2.on("pointerdown",(()=>{
+                    SOUNDS.change.play();
                     if(BOARDINFO.connectMode === false){
                         BOARDINFO.changeQueue.push(i2);
                     }
+                    
                 }));
                 v2.position.set(ORBPOSITIONS[i][i2].x,ORBPOSITIONS[i][i2].y);
                 v2.anchor.set(0.5,0.5);
