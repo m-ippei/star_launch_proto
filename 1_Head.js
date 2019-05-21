@@ -68,7 +68,20 @@ let BOARDINFO = {
         "text_style":{
             align:"center",
             fontFamily: "Kosugi Maru",
-            fontSize: 120
+            fontSize: 120,
+            fill:['#f4f2db','#ffffff']
+        }
+    },
+    "SCORE":{
+        "score":0,
+        "style":null,
+        "texture":null,
+        "update":false,
+        "text_style":{
+            align:"center",
+            fontFamily: "Kosugi Maru",
+            fontSize: 120,
+            fill:['#f4f2db','#ffffff']
         }
     },
     "changeQueue":[],

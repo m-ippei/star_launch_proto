@@ -59,12 +59,16 @@ function setUpdate() {
                 console.log("No Pair")
             }else if(_lists_arr.length === 1){
                 if(_lists_arr[0][1] === 2){
+                    BOARDINFO.SCORE.score += (100+(100*CHAIN*0.25))
                     MainTextUpdater("1 Pair");
                 }else if(_lists_arr[0][1] === 3){
+                    BOARDINFO.SCORE.score += (200+(200*CHAIN*0.25))
                     MainTextUpdater("3 Orbs");
                 }else if(_lists_arr[0][1] === 4){
                     MainTextUpdater("4 Orbs");
+                    BOARDINFO.SCORE.score += (400+(400*CHAIN*0.25))
                 }else if(_lists_arr[0][1] === 5){
+                    BOARDINFO.SCORE.score += (800+(800*CHAIN*0.25))
                     MainTextUpdater("Star!");
                 }
             }else if(_lists_arr.length === 2){
@@ -146,7 +150,18 @@ function setUpdate() {
             BOARDINFO.message.update = false;
         }
     })
-    
+
+    RESULT.ticker.add((delta)=>{
+        RESULT.stage.removeChild(BOARDINFO.SCORE.texture);
+        BOARDINFO.SCORE.style = new PIXI.TextStyle(BOARDINFO.SCORE.text_style);
+        BOARDINFO.SCORE.texture = new PIXI.Text(BOARDINFO.SCORE.score,BOARDINFO.SCORE.style);
+        BOARDINFO.SCORE.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
+        BOARDINFO.SCORE.texture.anchor.set(0.5,0.5);
+            //BOARDINFO.message.texture.anchor.set(1,1);
+            //BOARDINFO.texture.width = BOARDSCALE.TextPosition.width * LOCALBOARDPOSITION.DrawSize.unitSize;
+            //BOARDINFO.texture.height = BOARDSCALE.TextPosition.height * LOCALBOARDPOSITION.DrawSize.unitSize;
+        RESULT.stage.addChild(BOARDINFO.SCORE.texture);
+    })
 }
 
 function MainTextUpdater(text){

@@ -23,7 +23,7 @@ function Initialize(name,isHidden){
     const app = new PIXI.Application({
         width:WIDTH,
         height:HEIGHT,
-        backgroundColor:0xffffe0,
+        backgroundColor:0xbbbeca,
         antialias:true
     });
 
