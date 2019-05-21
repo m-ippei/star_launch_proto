@@ -5,10 +5,10 @@ function title(){
     sprite.interactive = true;
     sprite.on('pointerdown',()=>{
         TITLE.renderer.view.hidden = true;
-        //MAIN.renderer.view.hidden = false;
+        MAIN.renderer.view.hidden = false;
     })
 
-    console.log(TITLE);
+    
     //sprite.position.set(100,100)
 
     //document.body.appendChild(TITLE.view);
@@ -22,8 +22,8 @@ function main(){
 
     sprite.interactive = true;
     sprite.on('pointerdown',()=>{
-        MAIN.renderer.view.hidden = false;
-        TITLE.renderer.view.hidden = true;
+        MAIN.renderer.view.hidden = true;
+        RESULT.renderer.view.hidden = false;
     })
 
     //sprite.position.set(100,100)
@@ -33,7 +33,7 @@ function main(){
     MAIN.stage.addChild(sprite);
 }
 
-/*
+
 function result(){
     const sprite = new PIXI.Sprite(sheet.textures["back_to_title.png"]);
 
@@ -49,4 +49,3 @@ function result(){
     document.body.appendChild(RESULT.view);
     RESULT.stage.addChild(sprite);
 }
-*/

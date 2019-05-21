@@ -46,7 +46,7 @@ function Initialize(name,isHidden){
 
     //全画面設定
     app.view.style.position = "absolute";
-    app.renderer.view.style.display = "block";
+    //app.renderer.view.style.display = "block";
     app.renderer.autoDensity = true;
     app.resize(WIDTH,HEIGHT);
 

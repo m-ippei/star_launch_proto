@@ -15,11 +15,11 @@ class StarBoard{
 PIXI.Loader.shared.onComplete.add(()=>{
     //初期化処理
     TITLE = Initialize("title",false);
-    //MAIN = Initialize("main",false);
-    //RESULT = Initialize("result",true);
+    MAIN = Initialize("main",true);
+    RESULT = Initialize("result",true);
 
     title();
-    //main();
-    //result();
+    main();
+    result();
 
 })
