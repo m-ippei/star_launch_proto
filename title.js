@@ -1,6 +1,6 @@
 function title(){
     
-    const sprite = new PIXI.Sprite(sheet.textures["title.png"]);
+    const sprite = new PIXI.Sprite(SHEET.textures["title.png"]);
 
     sprite.interactive = true;
     sprite.on('pointerdown',()=>{
@@ -13,6 +13,17 @@ function title(){
 }
 
 function main(){
+
+    __result = new PIXI.Sprite(SHEET.textures["result.png"])
+
+    __result.interactive = true;
+    __result.on('pointerdown',()=>{
+        MAIN.renderer.view.hidden = true;
+        RESULT.renderer.view.hidden = false;
+    })
+
+    document.body.appendChild(MAIN.view);
+    MAIN.stage.addChild(__result);
 
     STAR = new PIXI.Graphics();
 
@@ -27,8 +38,8 @@ function main(){
         STAR.beginFill(0xFFDF00,1);
         STAR.drawStar(LOCALBOARDPOSITION.BoardCenter.x,LOCALBOARDPOSITION.BoardCenter.y,5,LOCALBOARDPOSITION.DrawSize.unitSize*(BOARDSCALE.InnerCircleRadius-BOARDSCALE.OrbPositionCircleRadius));
 
-        MAIN.renderer.view.hidden = true;
-        RESULT.renderer.view.hidden = false;
+        //MAIN.renderer.view.hidden = true;
+        //RESULT.renderer.view.hidden = false;
     });
     STAR.endFill();
 
@@ -44,7 +55,7 @@ function main(){
 
         SPRITES = _color.map((v,i,a)=>{
             const tmpArr = v.map((v2,i2,a2)=>{
-                const sprite = new PIXI.Sprite(sheet.textures[v2]);
+                const sprite = new PIXI.Sprite(SHEET.textures[v2]);
                 return sprite;
             })
             return tmpArr;
@@ -72,7 +83,7 @@ function main(){
 
 
 function result(){
-    const sprite = new PIXI.Sprite(sheet.textures["back_to_title.png"]);
+    const sprite = new PIXI.Sprite(SHEET.textures["back_to_title.png"]);
 
     sprite.interactive = true;
     sprite.on('pointerdown',()=>{

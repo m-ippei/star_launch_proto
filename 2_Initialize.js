@@ -1,5 +1,5 @@
 PIXI.Loader.shared.add("images/sprites.json").load((loader,resources)=>{
-    sheet = resources["images/sprites.json"].spritesheet;
+    SHEET = resources["images/sprites.json"].spritesheet;
 });
 
 

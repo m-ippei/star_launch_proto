@@ -110,7 +110,11 @@ let SPRITES = [];
 let ORBPOSITIONS = [];
 //星のグラフィック情報
 let STAR = null;
+//星の初期位置保存
 let ORB_INITIALPOSITIONS = [];
+
+//メイン画面からの移行用
+let __result = null;
 
 //定数
 

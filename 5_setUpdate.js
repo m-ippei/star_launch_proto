@@ -45,6 +45,7 @@ function setUpdate() {
                 return v[0];
             })
 
+            
             SPRITES[0].forEach((v,i,a)=>{
                 _disable_arr.forEach((v2,i2,a2)=>{
                     if(v._texture.textureCacheIds[0] === v2){
@@ -53,8 +54,94 @@ function setUpdate() {
                 })
             })
 
-            BOARDINFO.message.update = true;
-            BOARDINFO.message.text = "CLEAR!"
+            const tmpArr = SPRITES[0]
+
+            tmpArr.forEach((v,i,a)=>{
+                if(v.visible === false){
+                    SPRITES[0][i].destroy();
+                    SPRITES[0][i] = null;
+                }
+            })
+
+            const tmpArr2 = SPRITES[0];
+
+            
+
+            tmpArr2.forEach((v,i,a)=>{
+                if(v === null){
+                    SPRITES[0][i] = new PIXI.Sprite(SHEET.textures[ORBCOLORS[Math.floor(Math.random()*ORBCOLORS.length)]]);
+                    SPRITES[0][i].interactive = true;
+                    SPRITES[0][i].on("pointerdown",(()=>{
+                        if(BOARDINFO.connectMode === false){
+                            BOARDINFO.changeQueue.push(i);
+                        }
+                     }));
+                    SPRITES[0][i].position.set(ORB_INITIALPOSITIONS[0][i].x,ORB_INITIALPOSITIONS[0][i].y);
+                    SPRITES[0][i].anchor.set(0.5,0.5);
+                    SPRITES[0][i].width = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
+                    SPRITES[0][i].height = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
+                    MAIN.stage.addChild(SPRITES[0][i]);
+                    //console.log(v2)
+                }
+            })
+
+            //console.log(MAIN.stage.children)
+
+            
+
+            
+
+            /*
+           SPRITES[0].forEach((v,i,a)=>{
+            _disable_arr.forEach((v2,i2,a2)=>{
+                if(v._texture.textureCacheIds[0] === v2){
+                    v = null;
+                }
+            })
+        })
+        */
+
+            /*
+            SPRITES[0].forEach((v,i,a)=>{
+                _disable_arr.forEach((v2,i2,a2)=>{
+                    if(v._texture.textureCacheIds[0] === v2){
+                        //v.visible = false;
+                        // v = null;
+                    }
+                })
+            })
+            */
+
+
+            //console.log(SPRITES)
+            /*
+            SPRITES.forEach((v,i,a)=>{
+                v.forEach((v2,i2,a2)=>{
+                    if(v2.visible === false){
+                        //console.log(v2)
+                        MAIN.stage.removeChild(v2);
+                        v2 = new PIXI.Sprite(SHEET.textures[ORBCOLORS[Math.floor(Math.random()*ORBCOLORS.length)]]);
+                        v2.interactive = true;
+                        v2.on("pointerdown",(()=>{
+                            if(BOARDINFO.connectMode === false){
+                                BOARDINFO.changeQueue.push(i2);
+                            }
+                         }));
+                        v2.position.set(ORB_INITIALPOSITIONS[i][i2].x,ORB_INITIALPOSITIONS[i][i2].y);
+                        v2.anchor.set(0.5,0.5);
+                        v2.width = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
+                        v2.height = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
+                        MAIN.stage.addChild(v2);
+                        //console.log(v2)
+                    }
+                })
+            })
+            */
+
+            //console.log(SPRITES)
+
+            //BOARDINFO.message.update = true;
+            //BOARDINFO.message.text = "CLEAR!"
 
             BOARDINFO.connectMode = false;
 
