@@ -59,34 +59,34 @@ function setUpdate() {
                 if(_lists_arr[0][1] === 2){
                     TIME.point = 100
                     BOARDINFO.SCORE.score += TIME.point;
-                    MainTextUpdater("Single");
+                    MainTextUpdater("Single\n100");
                     COUNTER.single += 1;
                 }else if(_lists_arr[0][1] === 3){
-                    TIME.point = 300
+                    TIME.point = 400
                     BOARDINFO.SCORE.score += TIME.point
-                    MainTextUpdater("3 Orbs");
+                    MainTextUpdater("3 Orbs\n400");
                     COUNTER.o3 += 1;
                 }else if(_lists_arr[0][1] === 4){
-                    MainTextUpdater("4 Orbs");
-                    TIME.point = 500
+                    MainTextUpdater("4 Orbs\n600");
+                    TIME.point = 600
                     BOARDINFO.SCORE.score += TIME.point;
                     COUNTER.o4 += 1;
                 }else if(_lists_arr[0][1] === 5){
                     TIME.point = 800
                     BOARDINFO.SCORE.score += TIME.point;
-                    MainTextUpdater("Star!");
+                    MainTextUpdater("Star!\n800");
                     COUNTER.star +=1;
                 }
             }else if(_lists_arr.length === 2){
                 if(_lists_arr[0][1] === 3 || _lists_arr[1][1] === 3){
-                    TIME.point = 400
+                    TIME.point = 500
                     BOARDINFO.SCORE.score += TIME.point
-                    MainTextUpdater("23!");
+                    MainTextUpdater("MixStar\n500");
                     COUNTER.o23 += 1;
                 }else{
                     TIME.point = 300
                     BOARDINFO.SCORE.score += TIME.point
-                    MainTextUpdater("Double");
+                    MainTextUpdater("Double\n300");
                     COUNTER.double += 1;
                 }
             }
@@ -176,7 +176,7 @@ function setUpdate() {
         }else{
         MAIN.stage.removeChild(TIME.texture);
         //BOARDINFO.message.style = new PIXI.TextStyle(BOARDINFO.message.text_style);
-        TIME.texture = new PIXI.Text("TIME: "+ TIME.time.toFixed(2)+"\n"+"SCORE: "+BOARDINFO.SCORE.score+"\n"+"POINT: "+TIME.point,new PIXI.TextStyle({
+        TIME.texture = new PIXI.Text("TIME: "+ TIME.time.toFixed(2)+"\n"+"SCORE: "+BOARDINFO.SCORE.score,new PIXI.TextStyle({
             fontFamily: "Kosugi Maru",
             fontSize: 40,
             fill:['#f4f2db','#ffffff'],
@@ -192,12 +192,22 @@ function setUpdate() {
 
     RESULT.ticker.add((delta)=>{
         if(BOARDINFO.SCORE.update){
+            let text = "";
+            text += "SCORE:" + BOARDINFO.SCORE.score;
+            text += "\n\n";
+            text += "1等星:" + COUNTER.star + "\n";
+            text += "2等星:" + COUNTER.o4 + "\n";
+            text += "3等星:" + COUNTER.o23 + "\n"
+            text += "4等星:" + COUNTER.o3 + "\n";
+            text += "5等星:" + COUNTER.double + "\n";
+            text += "6等星:" + COUNTER.single + "\n";
             RESULT.stage.removeChild(BOARDINFO.SCORE.texture);
             BOARDINFO.SCORE.style = new PIXI.TextStyle(BOARDINFO.SCORE.text_style);
-            BOARDINFO.SCORE.texture = new PIXI.Text(BOARDINFO.SCORE.score,BOARDINFO.SCORE.style);
-            BOARDINFO.SCORE.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
-            BOARDINFO.SCORE.texture.anchor.set(0.5,0.5);
+            BOARDINFO.SCORE.texture = new PIXI.Text(text,BOARDINFO.SCORE.style);
+            BOARDINFO.SCORE.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+((BOARDSCALE.TextPosition.y-2)*LOCALBOARDPOSITION.DrawSize.unitSize));
+            BOARDINFO.SCORE.texture.anchor.set(0.5,0);
             RESULT.stage.addChild(BOARDINFO.SCORE.texture);
+            BOARDINFO.SCORE.update = false;
         }
         
     })
