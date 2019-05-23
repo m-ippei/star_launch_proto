@@ -51,22 +51,6 @@ function main(){
     bg.width = LOCALBOARDPOSITION.DrawSize.unitSize * 9;
     bg.height = LOCALBOARDPOSITION.DrawSize.unitSize * 16;
     MAIN.stage.addChild(bg);
-    
-    /*
-    __result = new PIXI.Sprite(SHEET.textures["result.png"])
-
-    __result.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight)
-
-    __result.interactive = true;
-    __result.on('pointerdown',()=>{
-        MAIN.renderer.view.hidden = true;
-        RESULT.renderer.view.hidden = false;
-        BOARDINFO.SCORE.update = true;
-    })
-
-    //document.body.appendChild(MAIN.view);
-    MAIN.stage.addChild(__result);
-    */
 
     STAR = new PIXI.Graphics();
 
@@ -75,57 +59,51 @@ function main(){
     STAR.drawStar(LOCALBOARDPOSITION.BoardCenter.x,LOCALBOARDPOSITION.BoardCenter.y,5,LOCALBOARDPOSITION.DrawSize.unitSize*(BOARDSCALE.InnerCircleRadius-BOARDSCALE.OrbPositionCircleRadius));
     STAR.interactive = true;
     STAR.on("pointerdown",()=>{
-        
         BOARDINFO.connectMode = true;
         STAR.clear();
         STAR.lineStyle(0);
         STAR.beginFill(0xFFDF00,1);
         STAR.drawStar(LOCALBOARDPOSITION.BoardCenter.x,LOCALBOARDPOSITION.BoardCenter.y,5,LOCALBOARDPOSITION.DrawSize.unitSize*(BOARDSCALE.InnerCircleRadius-BOARDSCALE.OrbPositionCircleRadius));
-
-        //MAIN.renderer.view.hidden = true;
-        //RESULT.renderer.view.hidden = false;
     });
-    STAR.endFill();
 
+    STAR.endFill();
     MAIN.stage.addChild(STAR);
 
     let _arr = util_3x5Array.map((arr)=>arr.slice());
-        let _color = _arr.map((v)=>{
-            const tmpArr = v.map((v2)=>{
-                return ORBCOLORS[Math.floor(Math.random()*ORBCOLORS.length)];
-            })
-            return tmpArr;
+    let _color = _arr.map((v)=>{
+        const tmpArr = v.map((v2)=>{
+            return ORBCOLORS[Math.floor(Math.random()*ORBCOLORS.length)];
         })
+        return tmpArr;
+    })
 
-        SPRITES = _color.map((v,i,a)=>{
-            const tmpArr = v.map((v2,i2,a2)=>{
-                const sprite = new PIXI.Sprite(SHEET.textures[v2]);
-                return sprite;
-            })
-            return tmpArr;
+    SPRITES = _color.map((v,i,a)=>{
+        const tmpArr = v.map((v2,i2,a2)=>{
+            const sprite = new PIXI.Sprite(SHEET.textures[v2]);
+            return sprite;
         })
+        return tmpArr;
+    })
 
-        SPRITES.forEach((v,i,a)=>{
-            v.forEach((v2,i2,a2)=>{
-                v2.interactive = true;
-                v2.on("pointerdown",(()=>{
-                    SOUNDS.change.stop();
-                    SOUNDS.change.play();
-                    if(BOARDINFO.connectMode === false){
-                        BOARDINFO.changeQueue.push(i2);
-                    }
+    SPRITES.forEach((v,i,a)=>{
+        v.forEach((v2,i2,a2)=>{
+            v2.interactive = true;
+            v2.on("pointerdown",(()=>{
+                if(BOARDINFO.connectMode === false){
+                    BOARDINFO.changeQueue.push(i2);
+                }
                     
-                }));
-                v2.position.set(ORBPOSITIONS[i][i2].x,ORBPOSITIONS[i][i2].y);
-                v2.anchor.set(0.5,0.5);
-                v2.width = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
-                v2.height = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
-                MAIN.stage.addChild(v2);
-            })
+            }));
+            v2.position.set(ORBPOSITIONS[i][i2].x,ORBPOSITIONS[i][i2].y);
+            v2.anchor.set(0.5,0.5);
+            v2.width = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
+            v2.height = LOCALBOARDPOSITION.DrawSize.unitSize * BOARDSCALE.OrbRadius;
+            MAIN.stage.addChild(v2);
         })
+    })
 
-    
-    
+    BOARDINFO.message.texture = new PIXI.Text(BOARDINFO.message.text);
+    MAIN.stage.addChild(BOARDINFO.message.texture);
 
     BOARDINFO.SCORE.texture = new PIXI.Text(BOARDINFO.SCORE.text);
     MAIN.stage.addChild(BOARDINFO.SCORE.texture);
@@ -164,10 +142,12 @@ function result(){
     bg.width = LOCALBOARDPOSITION.DrawSize.unitSize * 9;
     bg.height = LOCALBOARDPOSITION.DrawSize.unitSize * 16;
 
-    result.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(LOCALBOARDPOSITION.DrawSize.unitSize * 4.5),LOCALBOARDPOSITION.DrawSize.TopHeight+(LOCALBOARDPOSITION.DrawSize.unitSize*1));
+    result.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(LOCALBOARDPOSITION.DrawSize.unitSize * 4.5),LOCALBOARDPOSITION.DrawSize.TopHeight+(LOCALBOARDPOSITION.DrawSize.unitSize));
+    result.width = LOCALBOARDPOSITION.DrawSize.unitSize * 4;
+    result.height = LOCALBOARDPOSITION.DrawSize.unitSize * 1;
     result.anchor.set(0.5,0.5);
 
-    BTT.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.CENTER.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.CENTER.y*LOCALBOARDPOSITION.DrawSize.unitSize));
+    BTT.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.CENTER.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+((BOARDSCALE.CENTER.y+2)*LOCALBOARDPOSITION.DrawSize.unitSize));
     BTT.anchor.set(0.5,0.5);
     BTT.width = LOCALBOARDPOSITION.DrawSize.unitSize * 4.5;
     BTT.height = LOCALBOARDPOSITION.DrawSize.unitSize * 2.1;

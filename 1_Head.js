@@ -80,9 +80,9 @@ let BOARDINFO = {
         "update":false,
         "text_style":{
             align:"center",
-            lineHeight:80,
+            lineHeight:90,
             fontFamily: "Kosugi Maru",
-            fontSize: 70,
+            fontSize: 90,
             fill:['#f4f2db','#ffffff'],
         }
     },
@@ -93,7 +93,7 @@ let BOARDINFO = {
         "point":0,
         "style":{
             fontFamily: "Kosugi Maru",
-            fontSize: 40,
+            fontSize: 80,
             fill:['#f4f2db','#ffffff'],
             wordWrap:true
         }
@@ -130,7 +130,13 @@ let LOCALBOARDPOSITION = {
     ]
 }
 
-// 変数
+//内部テキスト更新管理
+let __systemTimer = {
+    "count":0,
+    "update":false
+}
+
+
 
 //シーン
 let TITLE = null;
@@ -146,11 +152,6 @@ let STAR = null;
 //星の初期位置保存
 let ORB_INITIALPOSITIONS = [];
 
-//メイン画面からの移行用
-let __result = null;
-
-//連鎖数
-let CHAIN = 0;
 
 
 
@@ -161,8 +162,13 @@ let SHEET = null;
 
 //音データ
 let SOUNDS = {
-    change:null,
-    star:null
+    "change":null,
+    "single":null,
+    "double":null,
+    "o3":null,
+    "o4":null,
+    "mixstar":null,
+    "star":null,
 }
 
 //ウィンドウサイズのエイリアス

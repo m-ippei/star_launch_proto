@@ -4,7 +4,21 @@ PIXI.Loader.shared.add("images/sprites.json").load((loader,resources)=>{
     SOUNDS.change = new Howl({
         src:['sound/change.mp3']
     });
-    
+    SOUNDS.single = new Howl({
+        src:['sound/single.mp3']
+    });
+    SOUNDS.double = new Howl({
+        src:['sound/double.mp3']
+    });
+    SOUNDS.o3 = new Howl({
+        src:['sound/3orb.mp3']
+    });
+    SOUNDS.o4 = new Howl({
+        src:['sound/4orb.mp3']
+    });
+    SOUNDS.mixstar = new Howl({
+        src:['sound/mixstar.mp3']
+    });
     SOUNDS.star = new Howl({
         src:['sound/star.mp3']
     });
@@ -29,7 +43,6 @@ function Initialize(name,isHidden){
 
     //全画面設定
     app.view.style.position = "absolute";
-    //app.renderer.view.style.display = "block";
     app.renderer.autoDensity = true;
     app.resize(WIDTH,HEIGHT);
 
