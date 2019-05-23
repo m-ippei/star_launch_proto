@@ -87,7 +87,7 @@ let BOARDINFO = {
         }
     },
     "TIME":{
-        "time":40,
+        "time":30,
         "texture":null,
         "update":false,
         "point":0,
