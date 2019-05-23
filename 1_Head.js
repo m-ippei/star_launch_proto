@@ -86,6 +86,26 @@ let BOARDINFO = {
             fill:['#f4f2db','#ffffff'],
         }
     },
+    "TIME":{
+        "time":40,
+        "texture":null,
+        "update":false,
+        "point":0,
+        "style":{
+            fontFamily: "Kosugi Maru",
+            fontSize: 40,
+            fill:['#f4f2db','#ffffff'],
+            wordWrap:true
+        }
+    },
+    "COUNTER":{
+        "single":0,
+        "double":0,
+        "o3":0,
+        "o4":0,
+        "star":0,
+        "o23":0
+    },
     "changeQueue":[],
     "connectMode":false
 }
@@ -109,23 +129,6 @@ let LOCALBOARDPOSITION = {
         {"x":0,"y":0} //E
     ]
 }
-
-let TIME = {
-    "time":40,
-    "texture":null,
-    "update":false,
-    "point":0
-};
-
-let COUNTER = {
-    "single":0,
-    "double":0,
-    "o3":0,
-    "o4":0,
-    "star":0,
-    "o23":0
-}
-
 
 // 変数
 

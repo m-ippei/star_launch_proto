@@ -1,6 +1,8 @@
 //アップデート設定
 function setUpdate() {
     MAIN.ticker.add((delta)=>{
+
+
         if(BOARDINFO.changeQueue.length > 0){
             
             const vertex = BOARDINFO.changeQueue.shift();
@@ -51,43 +53,43 @@ function setUpdate() {
                 RESULT.renderer.view.hidden = false;
                 BOARDINFO.SCORE.update = true;
 
-                TIME.point = 0
-                TIME.time = 0;
+                BOARDINFO.TIME.point = 0
+                BOARDINFO.TIME.time = 0;
 
                 //console.log("No Pair")
             }else if(_lists_arr.length === 1){
                 if(_lists_arr[0][1] === 2){
-                    TIME.point = 100
-                    BOARDINFO.SCORE.score += TIME.point;
+                    BOARDINFO.TIME.point = 100
+                    BOARDINFO.SCORE.score += BOARDINFO.TIME.point;
                     MainTextUpdater("Single\n100");
-                    COUNTER.single += 1;
+                    BOARDINFO.COUNTER.single += 1;
                 }else if(_lists_arr[0][1] === 3){
-                    TIME.point = 400
-                    BOARDINFO.SCORE.score += TIME.point
+                    BOARDINFO.TIME.point = 400
+                    BOARDINFO.SCORE.score += BOARDINFO.TIME.point
                     MainTextUpdater("3 Orbs\n400");
-                    COUNTER.o3 += 1;
+                    BOARDINFO.COUNTER.o3 += 1;
                 }else if(_lists_arr[0][1] === 4){
                     MainTextUpdater("4 Orbs\n600");
-                    TIME.point = 600
-                    BOARDINFO.SCORE.score += TIME.point;
-                    COUNTER.o4 += 1;
+                    BOARDINFO.TIME.point = 600
+                    BOARDINFO.SCORE.score += BOARDINFO.TIME.point;
+                    BOARDINFO.COUNTER.o4 += 1;
                 }else if(_lists_arr[0][1] === 5){
-                    TIME.point = 800
-                    BOARDINFO.SCORE.score += TIME.point;
+                    BOARDINFO.TIME.point = 800
+                    BOARDINFO.SCORE.score += BOARDINFO.TIME.point;
                     MainTextUpdater("Star!\n800");
-                    COUNTER.star +=1;
+                    BOARDINFO.COUNTER.star +=1;
                 }
             }else if(_lists_arr.length === 2){
                 if(_lists_arr[0][1] === 3 || _lists_arr[1][1] === 3){
-                    TIME.point = 500
-                    BOARDINFO.SCORE.score += TIME.point
+                    BOARDINFO.TIME.point = 500
+                    BOARDINFO.SCORE.score += BOARDINFO.TIME.point
                     MainTextUpdater("MixStar\n500");
-                    COUNTER.o23 += 1;
+                    BOARDINFO.COUNTER.o23 += 1;
                 }else{
-                    TIME.point = 300
-                    BOARDINFO.SCORE.score += TIME.point
+                    BOARDINFO.TIME.point = 300
+                    BOARDINFO.SCORE.score += BOARDINFO.TIME.point
                     MainTextUpdater("Double\n300");
-                    COUNTER.double += 1;
+                    BOARDINFO.COUNTER.double += 1;
                 }
             }
 
@@ -163,44 +165,41 @@ function setUpdate() {
             BOARDINFO.message.update = false;
         }
 
-        if(TIME.update){
-            TIME.time -= delta*0.01;
+        //console.log(PIXI.Ticker.shared.deltaMS)
+
+        if(BOARDINFO.TIME.update){
+            BOARDINFO.TIME.time -= delta*PIXI.Ticker.shared.deltaMS*0.001;
         }
-        if(TIME.time < 0){
-            TIME.update = false;
-            TIME.time = 40;
-            TIME.point = 0;
+        if(BOARDINFO.TIME.time < 0){
+            BOARDINFO.TIME.update = false;
+            BOARDINFO.TIME.time = 40;
+            BOARDINFO.TIME.point = 0;
             MAIN.renderer.view.hidden = true;
             RESULT.renderer.view.hidden = false;
             BOARDINFO.SCORE.update = true;
         }else{
-        MAIN.stage.removeChild(TIME.texture);
+        MAIN.stage.removeChild(BOARDINFO.TIME.texture);
         //BOARDINFO.message.style = new PIXI.TextStyle(BOARDINFO.message.text_style);
-        TIME.texture = new PIXI.Text("TIME: "+ TIME.time.toFixed(2)+"\n"+"SCORE: "+BOARDINFO.SCORE.score,new PIXI.TextStyle({
-            fontFamily: "Kosugi Maru",
-            fontSize: 40,
-            fill:['#f4f2db','#ffffff'],
-            wordWrap:true
-            
-        }));
-        TIME.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight);
+        BOARDINFO.TIME.texture = new PIXI.Text("TIME: "+ BOARDINFO.TIME.time.toFixed(2)+"\n"+"SCORE: "+BOARDINFO.SCORE.score,new PIXI.TextStyle(BOARDINFO.TIME.style));
+        BOARDINFO.TIME.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight);
         //BOARDINFO.message.texture.anchor.set(0.5,0.5);
-        MAIN.stage.addChild(TIME.texture);
+        MAIN.stage.addChild(BOARDINFO.TIME.texture);
         }
         
     })
 
     RESULT.ticker.add((delta)=>{
         if(BOARDINFO.SCORE.update){
+            RESULT.stage.removeChild(BOARDINFO.SCORE.texture);
             let text = "";
             text += "SCORE:" + BOARDINFO.SCORE.score;
             text += "\n\n";
-            text += "1等星:" + COUNTER.star + "\n";
-            text += "2等星:" + COUNTER.o4 + "\n";
-            text += "3等星:" + COUNTER.o23 + "\n"
-            text += "4等星:" + COUNTER.o3 + "\n";
-            text += "5等星:" + COUNTER.double + "\n";
-            text += "6等星:" + COUNTER.single + "\n";
+            text += "1等星:" + BOARDINFO.COUNTER.star + "\n";
+            text += "2等星:" + BOARDINFO.COUNTER.o4 + "\n";
+            text += "3等星:" + BOARDINFO.COUNTER.o23 + "\n"
+            text += "4等星:" + BOARDINFO.COUNTER.o3 + "\n";
+            text += "5等星:" + BOARDINFO.COUNTER.double + "\n";
+            text += "6等星:" + BOARDINFO.COUNTER.single + "\n";
             RESULT.stage.removeChild(BOARDINFO.SCORE.texture);
             BOARDINFO.SCORE.style = new PIXI.TextStyle(BOARDINFO.SCORE.text_style);
             BOARDINFO.SCORE.texture = new PIXI.Text(text,BOARDINFO.SCORE.style);

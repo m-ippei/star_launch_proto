@@ -8,21 +8,21 @@ function title(){
     logo.on('pointerdown',()=>{
         TITLE.renderer.view.hidden = true;
         MAIN.renderer.view.hidden = false;
-        TIME.update = true;
+        BOARDINFO.TIME.update = true;
     })
 
     bg.interactive = true;
     bg.on('pointerdown',()=>{
         TITLE.renderer.view.hidden = true;
         MAIN.renderer.view.hidden = false;
-        TIME.update = true;
+        BOARDINFO.TIME.update = true;
     })
 
     start.interactive = true;
     start.on('pointerdown',()=>{
         TITLE.renderer.view.hidden = true;
         MAIN.renderer.view.hidden = false;
-        TIME.update = true;
+        BOARDINFO.TIME.update = true;
     })
 
     logo.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight);
@@ -130,8 +130,8 @@ function main(){
     BOARDINFO.SCORE.texture = new PIXI.Text(BOARDINFO.SCORE.text);
     MAIN.stage.addChild(BOARDINFO.SCORE.texture);
 
-    TIME.texture = new PIXI.Text(TIME.time);
-    MAIN.stage.addChild(TIME.texture);
+    BOARDINFO.TIME.texture = new PIXI.Text(BOARDINFO.TIME.time);
+    MAIN.stage.addChild(BOARDINFO.TIME.texture);
 
     document.body.appendChild(MAIN.view);
 }
@@ -148,8 +148,8 @@ function result(){
         RESULT.renderer.view.hidden = true;
         TITLE.renderer.view.hidden = false;
         BOARDINFO.SCORE.score = 0;
-        TIME.time = 40;
-        COUNTER = {
+        BOARDINFO.TIME.time = 40;
+        BOARDINFO.COUNTER = {
             "single":0,
             "double":0,
             "o3":0,
