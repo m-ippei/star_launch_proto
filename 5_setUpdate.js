@@ -181,6 +181,7 @@ function setUpdate() {
         }else{
             if(__systemTimer.update){
                 MAIN.stage.removeChild(BOARDINFO.TIME.texture);
+                BOARDINFO.TIME.texture.destroy();
                 BOARDINFO.TIME.texture = new PIXI.Text("TIME: "+ BOARDINFO.TIME.time.toFixed(2)+"\n"+"SCORE: "+BOARDINFO.SCORE.score,new PIXI.TextStyle(BOARDINFO.TIME.style));
                 BOARDINFO.TIME.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight+LOCALBOARDPOSITION.DrawSize.unitSize*1);
                 BOARDINFO.TIME.texture.width = LOCALBOARDPOSITION.DrawSize.unitSize * 2;
@@ -193,6 +194,7 @@ function setUpdate() {
         //役の情報表示
         if(BOARDINFO.message.update){
             MAIN.stage.removeChild(BOARDINFO.message.texture);
+            BOARDINFO.message.texture.destroy();
             BOARDINFO.message.style = new PIXI.TextStyle(BOARDINFO.message.text_style);
             BOARDINFO.message.texture = new PIXI.Text(BOARDINFO.message.text,BOARDINFO.message.style);
             BOARDINFO.message.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
