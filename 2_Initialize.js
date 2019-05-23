@@ -22,6 +22,10 @@ PIXI.Loader.shared.add("images/sprites.json").load((loader,resources)=>{
     SOUNDS.star = new Howl({
         src:['sound/star.mp3']
     });
+    SOUNDS.bgm = new Howl({
+        src:['sound/bgm.mp3'],
+        volume:0.3
+    });
 });
 
 

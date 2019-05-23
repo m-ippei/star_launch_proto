@@ -169,6 +169,7 @@ let SOUNDS = {
     "o4":null,
     "mixstar":null,
     "star":null,
+    "bgm":null
 }
 
 //ウィンドウサイズのエイリアス

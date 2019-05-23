@@ -43,6 +43,9 @@ function title(){
     TITLE.stage.addChild(bg);
     TITLE.stage.addChild(logo);
     TITLE.stage.addChild(start);
+
+    
+    SOUNDS.bgm.play();
 }
 
 function main(){
