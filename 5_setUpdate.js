@@ -41,6 +41,8 @@ function setUpdate() {
                 return v[1] > 1;
             })
 
+            
+
             if(_lists_arr.length === 0){
                 CHAIN = 0;
                 BOARDINFO.message.text = ""
@@ -48,23 +50,45 @@ function setUpdate() {
                 MAIN.renderer.view.hidden = true;
                 RESULT.renderer.view.hidden = false;
                 BOARDINFO.SCORE.update = true;
+
+                TIME.point = 0
+                TIME.time = 0;
+
                 //console.log("No Pair")
             }else if(_lists_arr.length === 1){
                 if(_lists_arr[0][1] === 2){
-                    BOARDINFO.SCORE.score += (100+(100*CHAIN*0.25))
-                    MainTextUpdater("1 Pair");
+                    TIME.point = 100
+                    BOARDINFO.SCORE.score += TIME.point;
+                    MainTextUpdater("Single");
+                    COUNTER.single += 1;
                 }else if(_lists_arr[0][1] === 3){
-                    BOARDINFO.SCORE.score += (200+(200*CHAIN*0.25))
+                    TIME.point = 300
+                    BOARDINFO.SCORE.score += TIME.point
                     MainTextUpdater("3 Orbs");
+                    COUNTER.o3 += 1;
                 }else if(_lists_arr[0][1] === 4){
                     MainTextUpdater("4 Orbs");
-                    BOARDINFO.SCORE.score += (400+(400*CHAIN*0.25))
+                    TIME.point = 500
+                    BOARDINFO.SCORE.score += TIME.point;
+                    COUNTER.o4 += 1;
                 }else if(_lists_arr[0][1] === 5){
-                    BOARDINFO.SCORE.score += (800+(800*CHAIN*0.25))
+                    TIME.point = 800
+                    BOARDINFO.SCORE.score += TIME.point;
                     MainTextUpdater("Star!");
+                    COUNTER.star +=1;
                 }
             }else if(_lists_arr.length === 2){
-                MainTextUpdater("23!");
+                if(_lists_arr[0][1] === 3 || _lists_arr[1][1] === 3){
+                    TIME.point = 400
+                    BOARDINFO.SCORE.score += TIME.point
+                    MainTextUpdater("23!");
+                    COUNTER.o23 += 1;
+                }else{
+                    TIME.point = 300
+                    BOARDINFO.SCORE.score += TIME.point
+                    MainTextUpdater("Double");
+                    COUNTER.double += 1;
+                }
             }
 
             //色の文字列だけにする。
@@ -138,6 +162,32 @@ function setUpdate() {
             MAIN.stage.addChild(BOARDINFO.message.texture);
             BOARDINFO.message.update = false;
         }
+
+        if(TIME.update){
+            TIME.time -= delta*0.01;
+        }
+        if(TIME.time < 0){
+            TIME.update = false;
+            TIME.time = 40;
+            TIME.point = 0;
+            MAIN.renderer.view.hidden = true;
+            RESULT.renderer.view.hidden = false;
+            BOARDINFO.SCORE.update = true;
+        }else{
+        MAIN.stage.removeChild(TIME.texture);
+        //BOARDINFO.message.style = new PIXI.TextStyle(BOARDINFO.message.text_style);
+        TIME.texture = new PIXI.Text("TIME: "+ TIME.time.toFixed(2)+"\n"+"SCORE: "+BOARDINFO.SCORE.score+"\n"+"POINT: "+TIME.point,new PIXI.TextStyle({
+            fontFamily: "Kosugi Maru",
+            fontSize: 40,
+            fill:['#f4f2db','#ffffff'],
+            wordWrap:true
+            
+        }));
+        TIME.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight);
+        //BOARDINFO.message.texture.anchor.set(0.5,0.5);
+        MAIN.stage.addChild(TIME.texture);
+        }
+        
     })
 
     RESULT.ticker.add((delta)=>{
@@ -155,6 +205,6 @@ function setUpdate() {
 
 function MainTextUpdater(text){
     CHAIN += 1;
-    BOARDINFO.message.text = text + ` ${CHAIN}CHAIN`;
+    BOARDINFO.message.text = text;
     BOARDINFO.message.update = true;
 }

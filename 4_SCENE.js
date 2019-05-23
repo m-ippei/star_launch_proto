@@ -8,18 +8,21 @@ function title(){
     logo.on('pointerdown',()=>{
         TITLE.renderer.view.hidden = true;
         MAIN.renderer.view.hidden = false;
+        TIME.update = true;
     })
 
     bg.interactive = true;
     bg.on('pointerdown',()=>{
         TITLE.renderer.view.hidden = true;
         MAIN.renderer.view.hidden = false;
+        TIME.update = true;
     })
 
     start.interactive = true;
     start.on('pointerdown',()=>{
         TITLE.renderer.view.hidden = true;
         MAIN.renderer.view.hidden = false;
+        TIME.update = true;
     })
 
     logo.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight);
@@ -49,7 +52,10 @@ function main(){
     bg.height = LOCALBOARDPOSITION.DrawSize.unitSize * 16;
     MAIN.stage.addChild(bg);
     
+    /*
     __result = new PIXI.Sprite(SHEET.textures["result.png"])
+
+    __result.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth,LOCALBOARDPOSITION.DrawSize.TopHeight)
 
     __result.interactive = true;
     __result.on('pointerdown',()=>{
@@ -58,8 +64,9 @@ function main(){
         BOARDINFO.SCORE.update = true;
     })
 
-    document.body.appendChild(MAIN.view);
+    //document.body.appendChild(MAIN.view);
     MAIN.stage.addChild(__result);
+    */
 
     STAR = new PIXI.Graphics();
 
@@ -123,6 +130,9 @@ function main(){
     BOARDINFO.SCORE.texture = new PIXI.Text(BOARDINFO.SCORE.text);
     MAIN.stage.addChild(BOARDINFO.SCORE.texture);
 
+    TIME.texture = new PIXI.Text(TIME.time);
+    MAIN.stage.addChild(TIME.texture);
+
     document.body.appendChild(MAIN.view);
 }
 
@@ -138,6 +148,15 @@ function result(){
         RESULT.renderer.view.hidden = true;
         TITLE.renderer.view.hidden = false;
         BOARDINFO.SCORE.score = 0;
+        TIME.time = 40;
+        COUNTER = {
+            "single":0,
+            "double":0,
+            "o3":0,
+            "o4":0,
+            "star":0,
+            "o23":0
+        }
     })
 
 

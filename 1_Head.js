@@ -81,7 +81,8 @@ let BOARDINFO = {
             align:"center",
             fontFamily: "Kosugi Maru",
             fontSize: 120,
-            fill:['#f4f2db','#ffffff']
+            fill:['#f4f2db','#ffffff'],
+            wordWrap:true
         }
     },
     "changeQueue":[],
@@ -108,6 +109,22 @@ let LOCALBOARDPOSITION = {
     ]
 }
 
+let TIME = {
+    "time":40,
+    "texture":null,
+    "update":false,
+    "point":0
+};
+
+let COUNTER = {
+    "single":0,
+    "double":0,
+    "o3":0,
+    "o4":0,
+    "star":0,
+    "o23":0
+}
+
 
 // 変数
 
@@ -130,6 +147,8 @@ let __result = null;
 
 //連鎖数
 let CHAIN = 0;
+
+
 
 //定数
 
