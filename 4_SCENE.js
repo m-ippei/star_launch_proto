@@ -129,7 +129,7 @@ function result(){
         RESULT.renderer.view.hidden = true;
         TITLE.renderer.view.hidden = false;
         BOARDINFO.SCORE.score = 0;
-        BOARDINFO.TIME.time = 40;
+        BOARDINFO.TIME.time = 30;
         BOARDINFO.COUNTER = {
             "single":0,
             "double":0,

@@ -47,13 +47,13 @@ function setUpdate() {
                 MAIN.renderer.view.hidden = true;
                 RESULT.renderer.view.hidden = false;
                 BOARDINFO.SCORE.update = true;
-                MAIN.stage.removeChild(BOARDINFO.message.texture);
-
+                
+                BOARDINFO.TIME.update = false;
                 BOARDINFO.TIME.point = 0;
                 BOARDINFO.TIME.time = 0;
 
             
-            //特典計算
+            //特点計算
             }else if(_lists_arr.length === 1){
                 if(_lists_arr[0][1] === 2){
                     SOUNDS.single.play();
@@ -173,7 +173,7 @@ function setUpdate() {
             BOARDINFO.TIME.update = false;
             BOARDINFO.message.text = ""
             BOARDINFO.message.update = true;
-            BOARDINFO.TIME.time = 40;
+            BOARDINFO.TIME.time = 30;
             BOARDINFO.TIME.point = 0;
             BOARDINFO.SCORE.update = true;
             MAIN.renderer.view.hidden = true;
@@ -199,8 +199,8 @@ function setUpdate() {
             BOARDINFO.message.texture = new PIXI.Text(BOARDINFO.message.text,BOARDINFO.message.style);
             BOARDINFO.message.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+(BOARDSCALE.TextPosition.y*LOCALBOARDPOSITION.DrawSize.unitSize));
             BOARDINFO.message.texture.anchor.set(0.5,0.5);
-            BOARDINFO.message.texture.width = LOCALBOARDPOSITION.DrawSize.unitSize * 5;
-            BOARDINFO.message.texture.height = LOCALBOARDPOSITION.DrawSize.unitSize * 2;
+            BOARDINFO.message.texture.width = LOCALBOARDPOSITION.DrawSize.unitSize * 4.854;
+            BOARDINFO.message.texture.height = LOCALBOARDPOSITION.DrawSize.unitSize * 3;
             MAIN.stage.addChild(BOARDINFO.message.texture);
             BOARDINFO.message.update = false;
         }
@@ -209,6 +209,7 @@ function setUpdate() {
     RESULT.ticker.add((delta)=>{
         if(BOARDINFO.SCORE.update){
             RESULT.stage.removeChild(BOARDINFO.SCORE.texture);
+            BOARDINFO.SCORE.texture.destroy();
             let text = "";
             text += "SCORE:" + BOARDINFO.SCORE.score;
             text += "\n\n";

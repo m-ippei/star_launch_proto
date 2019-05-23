@@ -69,8 +69,8 @@ let BOARDINFO = {
             align:"center",
             fontFamily: "Kosugi Maru",
             fontSize: 120,
-            lineHeight:120,
-            fill:['#f4f2db','#ffffff']
+            lineHeight:130,
+            fill:['#f4f2db','#ffffff'],
         }
     },
     "SCORE":{
