@@ -2,6 +2,7 @@
 function setUpdate() {
     MAIN.ticker.add((delta)=>{
 
+        /*
         //オーブの位置スワップ
         if(BOARDINFO.changeQueue.length > 0){
             SOUNDS.change.play();
@@ -17,6 +18,10 @@ function setUpdate() {
                 })
             })
         }
+        */
+
+        //オーブのエフェクト処理と回転処理を行う。時間更新量を入れる。
+        ChangeSys(delta);
 
         //星が繋がれた時
         if(BOARDINFO.connectMode){
@@ -53,7 +58,7 @@ function setUpdate() {
                 BOARDINFO.TIME.time = 0;
 
             
-            //特点計算
+            //得点計算
             }else if(_lists_arr.length === 1){
                 if(_lists_arr[0][1] === 2){
                     SOUNDS.single.play();
@@ -204,31 +209,6 @@ function setUpdate() {
             MAIN.stage.addChild(BOARDINFO.message.texture);
             BOARDINFO.message.update = false;
         }
-    })
-
-    RESULT.ticker.add((delta)=>{
-        if(BOARDINFO.SCORE.update){
-            RESULT.stage.removeChild(BOARDINFO.SCORE.texture);
-            BOARDINFO.SCORE.texture.destroy();
-            let text = "";
-            text += "SCORE:" + BOARDINFO.SCORE.score;
-            text += "\n\n";
-            text += "1等星:" + BOARDINFO.COUNTER.star + "\n";
-            text += "2等星:" + BOARDINFO.COUNTER.o4 + "\n";
-            text += "3等星:" + BOARDINFO.COUNTER.o23 + "\n"
-            text += "4等星:" + BOARDINFO.COUNTER.o3 + "\n";
-            text += "5等星:" + BOARDINFO.COUNTER.double + "\n";
-            text += "6等星:" + BOARDINFO.COUNTER.single + "\n";
-            BOARDINFO.SCORE.style = new PIXI.TextStyle(BOARDINFO.SCORE.text_style);
-            BOARDINFO.SCORE.texture = new PIXI.Text(text,BOARDINFO.SCORE.style);
-            BOARDINFO.SCORE.texture.position.set(LOCALBOARDPOSITION.DrawSize.TopWidth+(BOARDSCALE.TextPosition.x*LOCALBOARDPOSITION.DrawSize.unitSize),LOCALBOARDPOSITION.DrawSize.TopHeight+((BOARDSCALE.TextPosition.y)*LOCALBOARDPOSITION.DrawSize.unitSize));
-            BOARDINFO.SCORE.texture.width = LOCALBOARDPOSITION.DrawSize.unitSize * 6;
-            BOARDINFO.SCORE.texture.height = LOCALBOARDPOSITION.DrawSize.unitSize * 9;
-            BOARDINFO.SCORE.texture.anchor.set(0.5,0);
-            RESULT.stage.addChild(BOARDINFO.SCORE.texture);
-            BOARDINFO.SCORE.update = false;
-        }
-        
     })
 }
 
