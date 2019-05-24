@@ -144,17 +144,15 @@ let __systemTimer = {
 let _sysOrbChange = {
     //定数
     "DEGREE120toRAD":2.0943951023931953,
-
     //変数
     //交換する頂点での各ラジアンが入る
     "_tmp_rotate_rad":[0,0,0],
     //更新当たりの増加量
     "addRadStep":0.1,
-    //更新する合計 度数法120°のラジアン
-    "radTotal":2.0943951023931953,
+    //変数 度数法120°のラジアン
+    "radTotal":0,
     //処理中の星の頂点
     "changeValue":null,
-
     //状態管理
     "changed":{
         //readyは準備完了かどうか。trueで初期化完了、falseで処理中。
