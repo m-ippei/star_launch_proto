@@ -45,7 +45,7 @@ function title(){
     TITLE.stage.addChild(start);
 
     
-    SOUNDS.bgm.loop();
+    SOUNDS.bgm.play();
 }
 
 function main(){
