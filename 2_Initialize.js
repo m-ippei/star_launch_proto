@@ -24,6 +24,7 @@ PIXI.Loader.shared.add("images/sprites.json").load((loader,resources)=>{
     });
     SOUNDS.bgm = new Howl({
         src:['sound/bgm.mp3'],
+        loop:true,
         volume:0.3
     });
 });
