@@ -68,8 +68,7 @@ let BOARDINFO = {
         "text_style":{
             align:"center",
             fontFamily: "Kosugi Maru",
-            fontSize: 120,
-            lineHeight:130,
+            fontSize: 80,
             fill:['#f4f2db','#ffffff'],
         }
     },
@@ -82,7 +81,7 @@ let BOARDINFO = {
             align:"center",
             lineHeight:90,
             fontFamily: "Kosugi Maru",
-            fontSize: 90,
+            fontSize: 80,
             fill:['#f4f2db','#ffffff'],
         }
     },
@@ -94,6 +93,7 @@ let BOARDINFO = {
         "style":{
             fontFamily: "Kosugi Maru",
             fontSize: 80,
+            lineHeight: 80,
             fill:['#f4f2db','#ffffff'],
             wordWrap:true
         }
