@@ -109,6 +109,7 @@ let BOARDINFO = {
     "changeQueue": [],
     "connectMode": false,
     "LaunchEffectDone": false,
+    "LaunchEffectEnable": false,
     "canOrbRotate": true
 }
 

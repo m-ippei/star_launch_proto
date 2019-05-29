@@ -4,15 +4,19 @@ function ConnectStar(deltaTime) {
     if (_sysTimeConnectInfo.update) {
         //オーブの回転禁止
         BOARDINFO.canOrbRotate = false;
-        //星の情報収集
+
         STAR.visible = false;
-        [_sysTimeConnectInfo.Colors, _sysTimeConnectInfo.Disables] = CorrectOrbInfo();
-        _sysTimeConnectInfo.update = false
+        //星の情報収集
+        [_sysTimeConnectInfo.Colors, _sysTimeConnectInfo.Disable] = CorrectOrbInfo();
+        console.log(_sysTimeConnectInfo);
+        BOARDINFO.LaunchEffectDone = false;
+        _sysTimeConnectInfo.update = false;
+        BOARDINFO.LaunchEffectEnable = true;
     }
 
     if (BOARDINFO.LaunchEffectDone) {
         //画面処理
-        ScreenUpdate(_sysTimeConnectInfo.Disables);
+        ScreenUpdate(_sysTimeConnectInfo.Disable);
         //得点処理
         Scoring(_sysTimeConnectInfo.Colors);
         //更新完了
@@ -22,9 +26,10 @@ function ConnectStar(deltaTime) {
         //エフェクト処理状況の初期化
         BOARDINFO.LaunchEffcetDone = false;
         STAR.visible = true;
-    } else {
+    } else if (BOARDINFO.LaunchEffectEnable) {
+
         //エフェクト処理
-        LaunchEffect(_sysTimeConnectInfo.Disables, deltaTime);
+        LaunchEffect(_sysTimeConnectInfo.Disable, deltaTime);
     }
 
 }
@@ -69,8 +74,6 @@ function LaunchEffect(Colorlist, deltaTime) {
         SPRITES[0].forEach((v, i, a) => {
             Colorlist.forEach((v2, i2, a2) => {
                 if (v._texture.textureCacheIds[0] === v2) {
-                    //v.visible = false;
-                    //BOARDINFO.changeQueue.push(i);
                     v.position.set(LOCALBOARDPOSITION.BoardCenter.x, LOCALBOARDPOSITION.BoardCenter.y);
                 }
             })
@@ -84,6 +87,7 @@ function LaunchEffect(Colorlist, deltaTime) {
                 }
             })
         })
+        BOARDINFO.LaunchEffectEnable = false;
         _sysLaunchEffect.TotalTime = 0;
         BOARDINFO.LaunchEffectDone = true;
     }
@@ -164,25 +168,10 @@ function ScreenUpdate(disableArr) {
         STAR.drawStar(LOCALBOARDPOSITION.BoardCenter.x, LOCALBOARDPOSITION.BoardCenter.y, 5, LOCALBOARDPOSITION.DrawSize.unitSize * (BOARDSCALE.InnerCircleRadius - BOARDSCALE.OrbPositionCircleRadius));
     }
 
-    /*
-
-    //消す色と星の頂点のオーブが一致したら非表示
-    SPRITES[0].forEach((v, i, a) => {
-        disableArr.forEach((v2, i2, a2) => {
-            if (v._texture.textureCacheIds[0] === v2) {
-                v.visible = false;
-                //BOARDINFO.changeQueue.push(i);
-            }
-        })
-    })
-
-    */
-
 
     //見えなくしたオーブを実際に消して空にする
     SPRITES[0].forEach((v, i, a) => {
         if (v.visible === false) {
-            //console.log("a")
             a[i].destroy();
             a[i] = null;
         }
@@ -206,5 +195,4 @@ function ScreenUpdate(disableArr) {
         }
     })
 
-    //STAR.visible = true;
 }
